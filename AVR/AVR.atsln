@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "c2_KOPI", "Cw_27 — kopia\c2_KOPI.asmproj", "{FD199ED8-DCF6-4075-9829-1E632EFDC610}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD199ED8-DCF6-4075-9829-1E632EFDC610}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FD199ED8-DCF6-4075-9829-1E632EFDC610}.Debug|AVR.Build.0 = Debug|AVR
+		{FD199ED8-DCF6-4075-9829-1E632EFDC610}.Release|AVR.ActiveCfg = Release|AVR
+		{FD199ED8-DCF6-4075-9829-1E632EFDC610}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
