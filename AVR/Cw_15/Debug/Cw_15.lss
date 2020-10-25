@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_15\main.asm Sat Oct 10 20:17:49 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_15\main.asm Sun Oct 25 00:48:27 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -669,30 +669,22 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_15\main.asm Sat Oct 10 
                                  ; Cw_15.asm
                                  ;
                                  ; Created: 09.10.2020 17:11:35
-                                 ; Author : Dawid
+                                 ; Author : IAmTheProgramer
                                  ;
                                  
                                  
-                                 ; Replace with your application code
-                                 
-000000 e01a                          LDI R17,10
-000001 ea06                          LDI R16,166
-000002 0000                       LOOP:NOP
-000003 0000                          NOP
-000004 9523                          INC R18
-000005 950a                          DEC R16
-000006 f7d9                          BRBC 1,LOOP 
-000007 951a                          DEC R17
-000008 f7c1                          BRBC 1,1
-000009 0000                          NOP
-00000a 0000                          NOP
-00000b 0000                          NOP
-00000c 0000                          NOP
-00000d 0000                          NOP
-00000e 0000                          NOP
-00000f 0000                          NOP
-000010 0000                          NOP
-000011 cfee                          RJMP 0
+000000 e01c                              LDI R17,12
+000001 ea06                              LDI R16,166
+                                   LOOP: 
+000002 0000                              NOP
+000003 9523                              INC R18
+000004 950a                              DEC R16
+000005 f7e1                              BRBC 1,LOOP 
+000006 951a                              DEC R17
+000007 f7c9                              BRBC 1,LOOP-1
+000008 0000                              NOP
+000009 0000                              NOP
+00000a cff5                              RJMP 0
 
 
 RESOURCE USE INFORMATION
@@ -728,7 +720,7 @@ clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
 cpse  :   0 dec   :   2 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
 inc   :   1 ld    :   0 ldd   :   0 ldi   :   2 lds   :   0 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :  10 
+lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   3 
 or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   0 
 ret   :   0 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
@@ -741,7 +733,7 @@ Instructions used: 6 out of 105 (5.7%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000024     36      0     36    2048   1.8%
+[.cseg] 0x000000 0x000016     22      0     22    2048   1.1%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

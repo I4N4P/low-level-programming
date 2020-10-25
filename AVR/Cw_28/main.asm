@@ -5,66 +5,59 @@
 ; Author : IAmTheProgramer
 ;
 
+            .MACRO DELAY
+                PUSH R16
+                PUSH R17
+                LDI R16,LOW(@0)   
+                LDI R17,HIGH(@0)  
+                RCALL DelayInMs
+                POP R17
+                POP R16
+            .ENDMACRO
 
-; Replace with your application code
-
-    .MACRO DELAY
-        LDI R16,LOW(@0)   ;Liczba milisekund <1,255> LSB
-        LDI R17,HIGH(@0)  ;Liczba milisekund <0,255> MSB
-        RCALL DelayInMs
-    .ENDMACRO
-
-    LDI R21,15
-    OUT DDRB,R21
-    OUT PORTB,R21
-MainLoop:
-    OUT PORTB,R21
-    DELAY 100
-    OUT PORTB,R20
-    DELAY 100
-    rjmp MainLoop
+            LDI R16,15
+            CLR R17
+            OUT DDRB,R16
+            OUT PORTB,R16
+  MainLoop:
+            OUT PORTB,R16
+            DELAY 100
+            OUT PORTB,R17
+            DELAY 100
+            rjmp MainLoop
 
 
 
-DelayInMs:
-    PUSH R17                ;Poœlij na STOSU     
-    PUSH R16  
-    RCALL DelayOneMs
-    POP R16                 ;POBIERZ ZE STOSU
-    POP R17            
-    DEC R16
-    BRBC 1,DelayInMs    ; skok jesli wiekszy od 0 pomija jesli r16=0
-    RCALL CheckMSB
-    PUSH R17
-    PUSH R16
-    RET                 ;powrót do RCALL DelayInMs 
-  DelayOneMs:         
-    LDI R22,4
-    PUSH R22
-    LDI R21,113
-    PUSH R21   
-  LOOP:NOP
-    NOP
-    POP R21
-    DEC R21
-    PUSH R21
-    BRBC 1,LOOP        ; skok jesli wiekszy od 0 pomija jesli r21=0
-    POP R21
-    POP R22
-    DEC R22  
-    PUSH R22
-    PUSH R21
-    BRBC 1,LOOP         ; skok jesli wiekszy od 0 pomija jesli r22=0
-    POP R21
-    POP R22
-    RET                 ;powrót do RCALL DelayOneMs
- CheckMSB: NOP
-    INC R17             ;zapenia dobre dzia³anie w momencie kiedy r17=0
-    DEC R17
-    BRBS 1,MainLoop     ; skok jesli = 0 pomija jesli r17=!0
-    LDI R16,255
-    DEC R17
-    PUSH R17
-    PUSH R16
-    RJMP DelayInMs
+DelayInMs: 
+             PUSH R24
+             PUSH R25
+             MOV R24,R16
+             MOV R25,R17 
+             SBIW R24,0
+             BRBS 1,DelayInMsEnd
+   DelayInMsLoop:
+             RCALL DelayOneMs
+             SBIW R24,1
+             BRBS 1,DelayInMsEnd
+             RJMP DelayInMsLoop
+   DelayInMsEnd:
+             POP R25
+             POP R24
+             RET
+
+
+  DelayOneMs:
+             PUSH R24
+             PUSH R25
+             LDI R24,52
+             LDI R25,5
+  DelayOneMsLoop:
+             NOP
+             SBIW R24,1
+             BRBS 1,DelayOneMsEnd
+             RJMP DelayOneMsLoop
+  DelayOneMsEnd:
+             POP R25
+             POP R24
+             RET
                      

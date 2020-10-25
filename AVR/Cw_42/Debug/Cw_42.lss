@@ -1,11 +1,8 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm Fri Oct 16 23:58:11 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm Fri Oct 23 22:05:35 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm(15): warning: .def: 'XL' redefinition (r26->r16)
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm(16): warning: .def: 'XH' redefinition (r27->r17)
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm(17): warning: .def: 'YL' redefinition (r28->r18)
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm(18): warning: .def: 'YH' redefinition (r29->r19)
+[builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
                                  
                                  
                                  
@@ -681,11 +678,7 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                  ;*** Divide ***
                                  ; X/Y -> Quotient,Remainder
                                  ; Input/Output: R16-19, Internal R24-25
-                                 ; inputs
-                                 .def XL=R16 ; divident
-                                 .def XH=R17
-                                 .def YL=R18 ; divisor
-                                 .def YH=R19
+                                 ; input
                                  ; outputs
                                  .def RL=R20 ; remainder
                                  .def RH=R21
@@ -697,29 +690,34 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
 000000 0000                      Divide : NOP
 000001 e081                         LDI QCtrL,1
 000002 e090                         LDI QCtrH,0
-000003 e010                         LDI  XH,HIGH(4)
-000004 e004                         LDI  XL,LOW(4)
-000005 e022                         LDI  YL,LOW(2)
-000006 e030                         LDI  YH,HIGH(2)
+000003 e0b3                         LDI  XH,HIGH(1001)
+000004 eea9                         LDI  XL,LOW(1001)
+000005 eec8                         LDI  YL,LOW(1000)
+000006 e0d3                         LDI  YH,HIGH(1000)
 000007 2744                         CLR RL
 000008 2755                         CLR RH
 000009 2766                         CLR QL
 00000a 2777                         CLR QH
-                                 
-00000b 1b02                          SUB XL,YL
-00000c 0b13                          SBC XH,YH
-00000d f031                          BRBS 1,Divide+20        // zwieksza  quotient i konczy dzia³anie
-00000e 0f68                          ADD QL,QCtrL
-00000f 1f79                          ADC QH,QCtrH
-000010 1702                          CP XL,YL
-000011 0713                          CPC XH,YH
-000012 f018                          BRLO Divide+22         // konczy dzia³anie
-000013 cff6                          RJMP Divide+10
-000014 0f68                          ADD QL,QCtrL
-000015 1f79                          ADC QH,QCtrH
-000016 2f40                          MOV RL,XL
-000017 2f51                          MOV RH,XH
-000018 9508                         RET
+00000b 17ac                          CP XL,YL
+00000c 07bd                          CPC XH,YH
+00000d f060                          BRLO DIV_RETURN1 
+00000e 0000                      DIV_LOOP:NOP
+00000f 1bac                          SUB XL,YL
+000010 0bbd                          SBC XH,YH
+000011 f031                          BRBS 1,DIV_RETURN1-2       // zwieksza  quotient i konczy dzia³anie
+000012 0f68                          ADD QL,QCtrL
+000013 1f79                          ADC QH,QCtrH
+000014 17ac                          CP XL,YL
+000015 07bd                          CPC XH,YH
+000016 f018                          BRLO DIV_RETURN1         // konczy dzia³anie
+000017 cff6                          RJMP DIV_LOOP
+000018 0f68                          ADD QL,QCtrL
+000019 1f79                          ADC QH,QCtrH
+00001a 0000                      DIV_RETURN1: NOP
+00001b 2f4a                          MOV RL,XL
+00001c 2f5b                          MOV RH,XH
+00001d 0000                      DIV_RETURN: NOP
+00001e 9508                         RET
                                  
 
 
@@ -740,23 +738,23 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   4 r17:   4 r18:   3 r19:   3 r20:   2 
-r21:   2 r22:   3 r23:   3 r24:   3 r25:   3 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:   0 r31:   0 
+r13:   0 r14:   0 r15:   0 r16:   0 r17:   0 r18:   0 r19:   0 r20:   2 
+r21:   2 r22:   3 r23:   3 r24:   3 r25:   3 r26:   5 r27:   5 r28:   4 
+r29:   4 r30:   0 r31:   0 
 Registers used: 10 out of 35 (28.6%)
 
 "ATtiny2313" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   2 add   :   2 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   1 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
 clh   :   0 cli   :   0 cln   :   0 clr   :   4 cls   :   0 clt   :   0 
-clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   1 cpi   :   0 
+clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   2 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
 inc   :   0 ld    :   0 ldd   :   0 ldi   :   6 lds   :   0 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 neg   :   0 nop   :   1 
+lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 neg   :   0 nop   :   4 
 or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   0 
 ret   :   1 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   1 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
@@ -769,8 +767,8 @@ Instructions used: 14 out of 105 (13.3%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000032     50      0     50    2048   2.4%
+[.cseg] 0x000000 0x00003e     62      0     62    2048   3.0%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 
-Assembly complete, 0 errors, 4 warnings
+Assembly complete, 0 errors, 0 warnings

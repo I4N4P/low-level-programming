@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_18\main.asm Sun Oct 11 11:11:56 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_18\main.asm Sun Oct 25 01:32:14 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -669,29 +669,32 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_18\main.asm Sun Oct 11 
                                  ; Cw_18.asm
                                  ;
                                  ; Created: 09.10.2020 17:11:35
-                                 ; Author : Dawid
+                                 ; Author :IAmTheProgramer
                                  ;
                                  
+000000 e06a                              LDI R22,10
+000001 2733                              CLR R19 
+000002 1763                              CP R22,R19
+000003 f3e1                              BREQ 0
                                  
-                                 ; Replace with your application code
-000000 e061                          LDI R22,1
-000001 eee7                          LDI R30,231
-000002 e0f3                          LDI R31,3
-000003 e0a1                          LDI R26,1
-000004 e0b0                          LDI R27,0
-000005 27cc                          CLR R28
-000006 27dd                          CLR R29
-000007 0000                       LOOP:NOP
-000008 0000                          NOP
-000009 0fca                          ADD R28,R26
-00000a 1fdb                          ADC R29,R27
-00000b 17ce                          CP R28,R30
-00000c 07df                          CPC R29,R31 
-00000d f7c9                          BRNE LOOP
-00000e 0000                          NOP
-00000f 0000                          NOP
-000010 956a                          DEC R22
-000011 f379                          BRBS 1,1
+000004 e705                              LDI R16,117
+000005 e014                              LDI R17,4
+000006 e021                              LDI R18,1  
+000007 2744                              CLR R20
+000008 2755                              CLR R21
+                                   LOOP:
+000009 0000                              NOP
+00000a 0f42                              ADD R20,R18
+00000b 1f53                              ADC R21,R19
+00000c 1704                              CP  R16,R20
+00000d 0715                              CPC R17,R21 
+00000e f7d1                              BRNE LOOP
+00000f 956a                              DEC R22
+000010 0000                              NOP
+000011 0000                              NOP
+000012 1763                              CP R22,R19
+000013 f361                              BREQ 0
+000014 cff2                              RJMP LOOP-2
                                  
 
 
@@ -712,36 +715,36 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   0 r17:   0 r18:   0 r19:   0 r20:   0 
-r21:   0 r22:   2 r23:   0 r24:   0 r25:   0 r26:   2 r27:   2 r28:   3 
-r29:   3 r30:   2 r31:   2 
+r13:   0 r14:   0 r15:   0 r16:   2 r17:   2 r18:   2 r19:   4 r20:   3 
+r21:   3 r22:   4 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   0 r31:   0 
 Registers used: 7 out of 35 (20.0%)
 
 "ATtiny2313" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   1 add   :   1 adiw  :   0 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   1 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
-clh   :   0 cli   :   0 cln   :   0 clr   :   2 cls   :   0 clt   :   0 
-clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   1 cpi   :   0 
+clh   :   0 cli   :   0 cln   :   0 clr   :   3 cls   :   0 clt   :   0 
+clv   :   0 clz   :   0 com   :   0 cp    :   3 cpc   :   1 cpi   :   0 
 cpse  :   0 dec   :   1 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   0 ld    :   0 ldd   :   0 ldi   :   5 lds   :   0 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   4 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :   4 lds   :   0 lpm   :   0 
+lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   3 
 or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   0 
-ret   :   0 reti  :   0 rjmp  :   0 rol   :   0 ror   :   0 sbc   :   0 
+ret   :   0 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 10 out of 105 (9.5%)
+Instructions used: 11 out of 105 (10.5%)
 
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000024     36      0     36    2048   1.8%
+[.cseg] 0x000000 0x00002a     42      0     42    2048   2.1%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

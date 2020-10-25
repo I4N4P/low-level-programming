@@ -1,13 +1,13 @@
 /*
- * Cw_2.asm
+ *   Cw_2.asm
  *
- *  Created: 10/7/2020 1:28:51 PM
- *   Author: student
+ *   Created: 10/7/2020 1:28:51 PM
+ *   Author: IAmTheProgramer
  */ 
 
 
-    ldi R20, 3
-    mov R0, R20
-LOOP: nop
-    dec R0
-    rjmp LOOP
+      LDI R16, 3
+      MOV R0, R16
+LOOP: NOP
+      DEC R0
+      RJMP LOOP

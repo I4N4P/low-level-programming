@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\AVR\Cw_29\main.asm Tue Oct 13 22:15:58 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_29\main.asm Sun Oct 25 02:41:43 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -673,89 +673,72 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                  ;
                                  
                                  
-                                 ; Replace with your application code
+                                             .MACRO DELAY
+                                                 PUSH R16
+                                                 PUSH R17
+                                                 LDI R16,LOW(@0)   
+                                                 LDI R17,HIGH(@0)  
+                                                 RCALL DelayInMs
+                                                 POP R17
+                                                 POP R16
+                                             .ENDMACRO
                                  
-                                     .MACRO DELAY
-                                         STS 0x60,R17                ;Poœlij na STOSU     
-                                         STS 0x61,R16
-                                         LDI R16,LOW(@0)   ;Liczba milisekund <1,255> LSB
-                                         LDI R17,HIGH(@0)  ;Liczba milisekund <0,255> MSB
-                                         PUSH R17                ;Poœlij na STOSU     
-                                         PUSH R16
-                                         RCALL DelayInMs
-                                         LDS R17,0x60               ;Poœlij na STOSU     
-                                         LDS R16,0x61
-                                     .ENDMACRO
+000000 e006                                      LDI R16,0x06
+000001 e31f                                      LDI R17,0x3F
+000002 e022                                      LDI R18,2
+000003 bb11                                      OUT DDRD,R17
+000004 bb27                                      OUT DDRB,R18
+000005 bb28                                      OUT PORTB,R18
+                                        MainLoop:
+000006 bb12                                      OUT PORTD,R17
+000007 930f
+000008 931f
+000009 ef0a
+00000a e010
+00000b d00b
+00000c 911f
+00000d 910f                                      DELAY 250
+00000e bb02                                      OUT PORTD,R16
+00000f 930f
+000010 931f
+000011 ef0a
+000012 e010
+000013 d003
+000014 911f
+000015 910f                                      DELAY 250
+000016 cfef                                      rjmp MainLoop
                                  
-000000 e006                          LDI R16,6
-000001 e012                          LDI R17,2
-000002 bb01                          OUT DDRD,R16
-000003 bb02                          OUT PORTD,R16
-000004 bb17                          OUT DDRB,R17
-                                 MainLoop:
-000005 bb18                          OUT PORTB,R17
-000006 9310 0060
-000008 9300 0061
-00000a e002
-00000b e010
-00000c 931f
-00000d 930f
-00000e d013
-00000f 9110 0060
-000011 9100 0061                     DELAY 2
-000013 bb48                          OUT PORTB,R20
-000014 9310 0060
-000016 9300 0061
-000018 e002
-000019 e010
-00001a 931f
-00001b 930f
-00001c d005
-00001d 9110 0060
-00001f 9100 0061                     DELAY 2
-000021 cfe3                          rjmp MainLoop
+                                        DelayInMs: 
+000017 938f                                       PUSH R24
+000018 939f                                       PUSH R25
+000019 2f80                                       MOV R24,R16
+00001a 2f91                                       MOV R25,R17 
+00001b 9700                                       SBIW R24,0
+00001c f021                                       BRBS 1,DelayInMsEnd
+                                        DelayInMsLoop:
+00001d d006                                       RCALL DelayOneMs
+00001e 9701                                       SBIW R24,1
+00001f f009                                       BRBS 1,DelayInMsEnd
+000020 cffc                                       RJMP DelayInMsLoop
+                                        DelayInMsEnd:
+000021 919f                                       POP R25
+000022 918f                                       POP R24
+000023 9508                                       RET
                                  
-                                 
-                                 
-                                 DelayInMs:
-                                     
-000022 931f                          PUSH R17                ;Poœlij na STOSU     
-000023 930f                          PUSH R16  
-000024 d006                          RCALL DelayOneMs
-000025 910f                          POP R16                 ;POBIERZ ZE STOSU
-000026 911f                          POP R17            
-000027 950a                          DEC R16
-000028 f7c9                          BRBC 1,DelayInMs    ; skok jesli wiekszy od 0 pomija jesli r16=0
-000029 c014                          RJMP CheckMSB
-00002a 9508                          Return:RET  
-                                   DelayOneMs:         
-00002b e014                          LDI R17,4
-00002c 931f                          PUSH R17
-00002d e701                          LDI R16,113
-00002e 930f                          PUSH R16   
-00002f 0000                        LOOP:NOP
-000030 0000                          NOP
-000031 910f                          POP R16
-000032 950a                          DEC R16
-000033 930f                          PUSH R16
-000034 f7d1                          BRBC 1,LOOP        ; skok jesli wiekszy od 0 pomija jesli r21=0
-000035 910f                          POP R16
-000036 911f                          POP R17
-000037 951a                          DEC R17  
-000038 931f                          PUSH R17
-000039 930f                          PUSH R16
-00003a f7a1                          BRBC 1,LOOP         ; skok jesli wiekszy od 0 pomija jesli r22=0
-00003b 910f                          POP R16
-00003c 911f                          POP R17
-00003d 9508                          RET                 ;powrót do RCALL DelayOneMs
-00003e 0000                       CheckMSB: NOP
-00003f 9513                          INC R17             ;zapenia dobre dzia³anie w momencie kiedy r17=0
-000040 951a                          DEC R17
-000041 f341                          BRBS 1,Return   ; skok jesli = 0 pomija jesli r17=!0
-000042 ef0f                          LDI R16,255
-000043 951a                          DEC R17
-000044 cfdd                          RJMP DelayInMs
-                                    
+                                       DelayOneMs:
+000024 938f                                       PUSH R24
+000025 939f                                       PUSH R25
+000026 e384                                       LDI R24,52
+000027 e095                                       LDI R25,5
+                                       DelayOneMsLoop:
+000028 0000                                       NOP
+000029 9701                                       SBIW R24,1
+00002a f009                                       BRBS 1,DelayOneMsEnd
+00002b cffc                                       RJMP DelayOneMsLoop
+                                       DelayOneMsEnd:
+00002c 919f                                       POP R25
+00002d 918f                                       POP R24
+00002e 9508                                       RET
 
 
 RESOURCE USE INFORMATION
@@ -775,36 +758,36 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  23 r17:  22 r18:   0 r19:   0 r20:   1 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:   9 r17:  10 r18:   3 r19:   0 r20:   0 
+r21:   0 r22:   0 r23:   0 r24:   9 r25:   6 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 3 out of 35 (8.6%)
+Registers used: 5 out of 35 (14.3%)
 
 "ATtiny2313" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   3 brbs  :   1 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   3 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
-cpse  :   0 dec   :   5 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   1 ld    :   0 ldd   :   0 ldi   :   9 lds   :   4 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   3 
-or    :   0 ori   :   0 out   :   5 pop   :   7 push  :  11 rcall :   3 
+cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :   9 lds   :   0 lpm   :   0 
+lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :   5 pop   :   8 push  :   8 rcall :   3 
 ret   :   2 reti  :   0 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 
-sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
+sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   3 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
-spm   :   0 st    :   0 std   :   0 sts   :   4 sub   :   0 subi  :   0 
+spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 14 out of 105 (13.3%)
+Instructions used: 11 out of 105 (10.5%)
 
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00008a    138      0    138    2048   6.7%
+[.cseg] 0x000000 0x00005e     94      0     94    2048   4.6%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

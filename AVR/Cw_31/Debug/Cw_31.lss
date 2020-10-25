@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\AVR\Cw_31\main.asm Tue Oct 13 23:07:33 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_31\main.asm Sun Oct 25 02:46:23 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -673,126 +673,102 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                  ;
                                  
                                  
-                                 ; Replace with your application code
+                                             .MACRO DELAY
+                                                 PUSH R16
+                                                 PUSH R17
+                                                 LDI R16,LOW(@0)   
+                                                 LDI R17,HIGH(@0)  
+                                                 RCALL DelayInMs
+                                                 POP R17
+                                                 POP R16
+                                             .ENDMACRO
                                  
-                                     .MACRO DELAY
-                                         PUSH r16             ;Poœlij na STOSU Rejestry które u¿ywane s¹ w delay
-                                         PUSH R17                    
-                                         LDI R16,LOW(@0)      ;Liczba milisekund <1,255> LSB
-                                         LDI R17,HIGH(@0)     ;Liczba milisekund <0,255> MSB
-                                         PUSH R17             ;Poœlij na STOSU zabezpieczenie rejestrów przed nadpisaniem    
-                                         PUSH R16
-                                         RCALL DelayInMs
-                                         POP R17              ;Odkrycie STOSU     
-                                         POP R16
-                                         POP r17              ;odczytanie pierwotnych wartoœci w rejestrze
-                                         POP R16                  
-                                     .ENDMACRO
                                  
-                                     .EQU Time=1
-                                     .EQU Digits_P=PORTB      ;Zmiana nazwy PortB
-                                     .EQU Segments_P=PORTD    ;zapalenie odpowiednich segmentów
-000000 e30f                          LDI R16,0x3F             
-000001 e012                          LDI R17,2
-000002 bb01                          OUT DDRD,R16
-000003 bb02                          OUT Segments_P,R16
-000004 bb17                          OUT DDRB,R17
-                                 MainLoop:                   ; miganie diodami
-000005 bb48                          OUT Digits_P,R20
-000006 e012                          LDI R17,2
-000007 bb18                          OUT Digits_P,R17
-000008 930f
-000009 931f
-00000a e001
-00000b e010
-00000c 931f
-00000d 930f
-00000e d02f
-00000f 911f
-000010 910f
-000011 911f
-000012 910f                          DELAY Time
-000013 bb48                          OUT Digits_P,R20
-000014 e014                          LDI R17,4
-000015 bb18                          OUT Digits_P,R17
-000016 930f
-000017 931f
-000018 e001
-000019 e010
-00001a 931f
-00001b 930f
-00001c d021
-00001d 911f
-00001e 910f
-00001f 911f
-000020 910f                          DELAY Time
-000021 bb48                          OUT Digits_P,R20
-000022 e018                          LDI R17,8
-000023 bb18                          OUT Digits_P,R17
-000024 930f
-000025 931f
-000026 e001
-000027 e010
+                                             .EQU Digits_P=PORTB      
+                                             .EQU Segments_P=PORTD    
+                                 
+000000 e30f                                  LDI R16,0x3F             
+000001 e012                                  LDI R17,2
+000002 2744                                  CLR R20
+000003 bb01                                  OUT DDRD,R16
+000004 bb17                                  OUT DDRB,R17
+000005 bb02                                  OUT Segments_P,R16    
+                                   MainLoop:                   
+000006 bb48                                  OUT Digits_P,R20
+000007 e012                                  LDI R17,2
+000008 bb18                                  OUT Digits_P,R17
+000009 930f
+00000a 931f
+00000b ee08
+00000c e013
+00000d d021
+00000e 911f
+00000f 910f                                  DELAY 1000
+000010 bb48                                  OUT Digits_P,R20
+000011 e014                                  LDI R17,4
+000012 bb18                                  OUT Digits_P,R17
+000013 930f
+000014 931f
+000015 ee08
+000016 e013
+000017 d017
+000018 911f
+000019 910f                                  DELAY 1000
+00001a bb48                                  OUT Digits_P,R20
+00001b e018                                  LDI R17,8
+00001c bb18                                  OUT Digits_P,R17
+00001d 930f
+00001e 931f
+00001f ee08
+000020 e013
+000021 d00d
+000022 911f
+000023 910f                                  DELAY 1000
+000024 bb48                                  OUT Digits_P,R20
+000025 e110                                  LDI R17,16
+000026 bb18                                  OUT Digits_P,R17
+000027 930f
 000028 931f
-000029 930f
-00002a d013
-00002b 911f
-00002c 910f
-00002d 911f
-00002e 910f                          DELAY Time
-00002f bb48                          OUT Digits_P,R20
-000030 e110                          LDI R17,16
-000031 bb18                          OUT Digits_P,R17
-000032 930f
-000033 931f
-000034 e001
-000035 e010
-000036 931f
-000037 930f
-000038 d005
-000039 911f
-00003a 910f
-00003b 911f
-00003c 910f                          DELAY Time
-00003d cfc7                          rjmp MainLoop
+000029 ee08
+00002a e013
+00002b d003
+00002c 911f
+00002d 910f                                  DELAY 1000
+00002e cfd7                                  rjmp MainLoop
                                  
                                  
                                  
-                                   DelayInMs: 
-00003e 931f                          PUSH R17                ;Poœlij na STOSU     
-00003f 930f                          PUSH R16  
-000040 d00b                          RCALL DelayOneMs
-000041 910f                          POP R16                 ;POBIERZ ZE STOSU
-000042 911f                          POP R17            
-000043 950a                          DEC R16
-000044 f7c9                          BRBC 1,DelayInMs    ; skok jesli R16 wiekszy od 0 , pomija jesli r16=0
-000045 9513                          INC R17             ;zapenia dobre dzia³anie w momencie kiedy r17=0
-000046 951a                          DEC R17
-000047 f019                          BRBS 1,Return   ; skok jesli R17 = 0 pomija jesli r17=!0
-000048 ef0f                          LDI R16,255
-000049 951a                          DEC R17
-00004a cff3                          RJMP DelayInMs
-00004b 9508                        Return:RET  
-                                   DelayOneMs:         
-00004c e011                          LDI R17,1
-00004d 931f                          PUSH R17
-00004e e701                          LDI R16,113
-00004f 930f                          PUSH R16   
-000050 0000                        LOOP:NOP
-000051 0000                          NOP
-000052 910f                          POP R16
-000053 950a                          DEC R16
-000054 930f                          PUSH R16
-000055 f7d1                          BRBC 1,LOOP        ; skok jesli wiekszy od 0 pomija jesli r21=0
-000056 910f                          POP R16
-000057 911f                          POP R17
-000058 951a                          DEC R17  
-000059 931f                          PUSH R17
-00005a 930f                          PUSH R16
-00005b f7a1                          BRBC 1,LOOP         ; skok jesli wiekszy od 0 pomija jesli r22=0
-00005c 910f                          POP R16
-00005d 911f                          POP R17
-00005e 9508                          RET                 ;powrót do RCALL DelayOneMs
+                                        DelayInMs: 
+00002f 938f                                       PUSH R24
+000030 939f                                       PUSH R25
+000031 2f80                                       MOV R24,R16
+000032 2f91                                       MOV R25,R17 
+000033 9700                                       SBIW R24,0
+000034 f021                                       BRBS 1,DelayInMsEnd
+                                        DelayInMsLoop:
+000035 d006                                       RCALL DelayOneMs
+000036 9701                                       SBIW R24,1
+000037 f009                                       BRBS 1,DelayInMsEnd
+000038 cffc                                       RJMP DelayInMsLoop
+                                        DelayInMsEnd:
+000039 919f                                       POP R25
+00003a 918f                                       POP R24
+00003b 9508                                       RET
+                                 
+                                       DelayOneMs:
+00003c 938f                                       PUSH R24
+00003d 939f                                       PUSH R25
+00003e e384                                       LDI R24,52
+00003f e095                                       LDI R25,5
+                                       DelayOneMsLoop:
+000040 0000                                       NOP
+000041 9701                                       SBIW R24,1
+000042 f009                                       BRBS 1,DelayOneMsEnd
+000043 cffc                                       RJMP DelayOneMsLoop
+                                       DelayOneMsEnd:
+000044 919f                                       POP R25
+000045 918f                                       POP R24
+000046 9508                                       RET 
                                  
                                     
 
@@ -814,26 +790,26 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  35 r17:  41 r18:   0 r19:   0 r20:   4 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  16 r17:  23 r18:   0 r19:   0 r20:   5 
+r21:   0 r22:   0 r23:   0 r24:   9 r25:   6 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 3 out of 35 (8.6%)
+Registers used: 5 out of 35 (14.3%)
 
 "ATtiny2313" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   3 brbs  :   1 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   3 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
-clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 
+clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
-cpse  :   0 dec   :   5 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   1 ld    :   0 ldd   :   0 ldi   :  17 lds   :   0 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   2 
-or    :   0 ori   :   0 out   :  11 pop   :  23 push  :  23 rcall :   5 
-ret   :   2 reti  :   0 rjmp  :   2 rol   :   0 ror   :   0 sbc   :   0 
-sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
+cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :  16 lds   :   0 lpm   :   0 
+lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :  11 pop   :  12 push  :  12 rcall :   5 
+ret   :   2 reti  :   0 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 
+sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   3 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
@@ -843,7 +819,7 @@ Instructions used: 12 out of 105 (11.4%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000be    190      0    190    2048   9.3%
+[.cseg] 0x000000 0x00008e    142      0    142    2048   6.9%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

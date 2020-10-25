@@ -22,6 +22,9 @@
   <FILE>Cw_42.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm</FILE><LINE>27</LINE></Divide>
+  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm</FILE><LINE>23</LINE></Divide>
+  <DIV_RETURN1><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm</FILE><LINE>49</LINE></DIV_RETURN1>
+  <DIV_LOOP><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm</FILE><LINE>37</LINE></DIV_LOOP>
+  <DIV_RETURN><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm</FILE><LINE>52</LINE></DIV_RETURN>
  </LABELS>
 </ASSEMBLER_INFO>

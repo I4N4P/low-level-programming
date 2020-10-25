@@ -2,15 +2,13 @@
 ; Cw_8.asm
 ;
 ; Created: 09.10.2020 17:11:35
-; Author : Dawid
+; Author : IAmTheProgramer
 ;
 
 
-; Replace with your application code
-
-nop
-nop
-rjmp 1
-nop
-nop
-nop
+    NOP
+    NOP
+    RJMP 1
+    NOP
+    NOP
+    NOP

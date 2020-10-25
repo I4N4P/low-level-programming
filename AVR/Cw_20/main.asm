@@ -2,17 +2,16 @@
 ; Cw_20.asm
 ;
 ; Created: 09.10.2020 17:11:35
-; Author : Dawid
+; Author : IAmTheProgramer
 ;
 
 
-; Replace with your application code
 
 MainLoop:
-    rcall DelayNCycles ;
-    rjmp MainLoop
-DelayNCycles: ;zwyk³a etykieta
-    nop
-    nop
-    nop
-    ret ;powrót do miejsca wywo³ania 
+         RCALL DelayNCycles 
+         RJMP MainLoop
+DelayNCycles: 
+             NOP
+             NOP
+             NOP
+             RET 

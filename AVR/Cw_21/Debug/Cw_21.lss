@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_21\main.asm Sun Oct 11 16:27:04 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_21\main.asm Sun Oct 25 01:45:57 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -666,28 +666,25 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\AVR\Cw_21\main.asm Sun Oct 11 
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Cw_20.asm
+                                 ; Cw_21.asm
                                  ;
                                  ; Created: 09.10.2020 17:11:35
-                                 ; Author : Dawid
+                                 ; Author : IAmTheProgramer
                                  ;
                                  
                                  
-                                 ; Replace with your application code
                                  
                                  MainLoop:
-000000 d002                          rcall DelayNCycles ;
-000001 d005                          rcall additional
-000002 cffd                          rjmp MainLoop
-                                 DelayNCycles: ;zwyk³a etykieta
-000003 0000                          nop
-000004 0000                          nop
-000005 0000                          nop
-000006 9508                          ret ;powrót do miejsca wywo³ania 
-                                 Additional:
-000007 0000                      nop
-000008 0000                      nop
-000009 0000                      nop
+000000 d002                               RCALL DelayNCycles 
+000001 d005                               RCALL ANOTHER
+000002 cffd                               RJMP MainLoop
+                                 DelayNCycles: 
+000003 0000                                   NOP
+000004 0000                                   NOP
+000005 0000                                   NOP
+000006 9508                                   RET 
+                                 ANOTHER:
+000007 0000                              NOP
 
 
 RESOURCE USE INFORMATION
@@ -723,7 +720,7 @@ clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
 inc   :   0 ld    :   0 ldd   :   0 ldi   :   0 lds   :   0 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   6 
+lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   4 
 or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   2 
 ret   :   2 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
@@ -736,7 +733,7 @@ Instructions used: 4 out of 105 (3.8%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000016     22      0     22    2048   1.1%
+[.cseg] 0x000000 0x000012     18      0     18    2048   0.9%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

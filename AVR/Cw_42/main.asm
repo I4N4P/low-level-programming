@@ -11,11 +11,7 @@
 ;*** Divide ***
 ; X/Y -> Quotient,Remainder
 ; Input/Output: R16-19, Internal R24-25
-; inputs
-.def XL=R16 ; divident
-.def XH=R17
-.def YL=R18 ; divisor
-.def YH=R19
+; input
 ; outputs
 .def RL=R20 ; remainder
 .def RH=R21
@@ -27,28 +23,33 @@
 Divide : NOP
    LDI QCtrL,1
    LDI QCtrH,0
-   LDI  XH,HIGH(4)
-   LDI  XL,LOW(4)
-   LDI  YL,LOW(2)
-   LDI  YH,HIGH(2)
+   LDI  XH,HIGH(1001)
+   LDI  XL,LOW(1001)
+   LDI  YL,LOW(1000)
+   LDI  YH,HIGH(1000)
    CLR RL
    CLR RH
    CLR QL
    CLR QH
-
+    CP XL,YL
+    CPC XH,YH
+    BRLO DIV_RETURN1 
+DIV_LOOP:NOP
     SUB XL,YL
     SBC XH,YH
-    BRBS 1,Divide+20        // zwieksza  quotient i konczy dzia³anie
+    BRBS 1,DIV_RETURN1-2       // zwieksza  quotient i konczy dzia³anie
     ADD QL,QCtrL
     ADC QH,QCtrH
     CP XL,YL
     CPC XH,YH
-    BRLO Divide+22         // konczy dzia³anie
-    RJMP Divide+10
+    BRLO DIV_RETURN1         // konczy dzia³anie
+    RJMP DIV_LOOP
     ADD QL,QCtrL
     ADC QH,QCtrH
+DIV_RETURN1: NOP
     MOV RL,XL
     MOV RH,XH
+DIV_RETURN: NOP
    RET
 
    

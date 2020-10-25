@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\AVR\Cw_30\main.asm Tue Oct 13 22:44:23 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_30\main.asm Sun Oct 25 02:41:57 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -450,8 +450,10 @@ EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
-CSEG MainLoop     00000005
-CSEG DelayInMs    0000003e
-CSEG DelayOneMs   0000004c
-CSEG Return       0000004b
-CSEG LOOP         00000050
+CSEG MainLoop     00000006
+CSEG DelayInMs    0000002f
+CSEG DelayInMsEnd 00000039
+CSEG DelayInMsLoop 00000035
+CSEG DelayOneMs   0000003c
+CSEG DelayOneMsLoop 00000040
+CSEG DelayOneMsEnd 00000044

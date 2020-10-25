@@ -1,28 +1,28 @@
 ;
-; Cw_18.asm
+; Cw_17.asm
 ;
 ; Created: 09.10.2020 17:11:35
-; Author : Dawid
+; Author :IAmTheProgramer
 ;
-
-
-; Replace with your application code
-    LDI R22,1
-    LDI R30,137
-    LDI R31,5
-    LDI R27,0
-    LDI R26 ,1
-    CLR R28
-    CLR R29
- LOOPMSB: NOP
- LOOPLSB:NOP
-    NOP
-    INC R28
-    CP R30,R28
-    BRNE LOOPLSB
-    INC R29
-    CP R31,R29
-    BRNE LOOPMSB
-    DEC R22
-    BRBC 1,0
+        LDI R22,0
+        CLR R18
+        CP R22,R18
+        BREQ 0
+ LOOP_1:   
+        LDI R17,8
+        LDI R16,249
+  LOOP:
+        NOP
+        DEC R16
+        BRBC 1,LOOP 
+        DEC R17
+        BRBC 1,LOOP-1
+        DEC R22
+        BRBC 1,LOOP_1
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        RJMP 0
     
