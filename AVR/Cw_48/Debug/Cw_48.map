@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_48\main.asm Sat Oct 24 02:58:58 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_48\main.asm Tue Oct 27 02:16:28 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,42 +448,32 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-CSEG _main        00000015
+CSEG _main        00000017
 CSEG _timer_isr   0000000c
 CSEG _Pin_B0_isr  0000000d
+CSEG NumberToDigits 000000ae
 DEF  PulseEdgeCtrL r0
-DEF  QCtrL        r24
+CSEG _Pin_B0_isr_end 00000015
 DEF  PulseEdgeCtrH r1
-DEF  QCtrH        r25
-CSEG CLEAR        00000046
-CSEG NumberToDigits 0000004a
-EQU  Time         00000001
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
 DEF  Digit_0      r2
 DEF  Digit_1      r3
 DEF  Digit_2      r4
 DEF  Digit_3      r5
-DEF  RL           r20
-DEF  RH           r21
-DEF  QL           r22
-DEF  QH           r23
-CSEG MainLoop     0000003e
-CSEG SetDigit     0000007c
-CSEG Divide       00000061
-CSEG DIV_RETURN1  00000077
-CSEG DIV_LOOP     0000006b
-CSEG DIV_RETURN   0000007a
-CSEG SET_DIGIT_SUBROUTINE 000000fa
-CSEG DelayInMs    0000011f
-CSEG TurnOnDigit0 000000ea
-CSEG LOOP1        00000108
-CSEG TurnOnDigit1 000000ee
-CSEG TurnOnDigit2 000000f2
-CSEG TurnOnDigit3 000000f6
-CSEG DigitTo7segCode 00000113
-CSEG DIGITNUMBER  00000110
-CSEG SegCode      00000119
-CSEG DelayOneMs   0000012d
-CSEG Return       0000012c
-CSEG LOOP         00000131
+DEF  QCtrL        r24
+DEF  QCtrH        r25
+CSEG MainLoop     00000037
+CSEG SegNumber    000000da
+CSEG DigitTo7segCode 000000e1
+CSEG DelayInMs    000000eb
+CSEG Divide       000000c9
+CSEG DivideLoop   000000cd
+CSEG DivideEnd    000000d5
+CSEG SegNumberData 000000df
+CSEG SevenSegCodeData 000000e6
+CSEG DelayInMsEnd 000000f5
+CSEG DelayInMsLoop 000000f1
+CSEG DelayOneMs   000000f8
+CSEG DelayOneMsLoop 000000fc
+CSEG DelayOneMsEnd 00000100

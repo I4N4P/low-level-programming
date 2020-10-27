@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_47\main.asm Sat Oct 24 02:19:15 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_47\main.asm Tue Oct 27 02:05:36 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,41 +448,31 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-CSEG _main        0000000d
+CSEG _main        0000000f
 CSEG _timer_isr   00000005
+CSEG NumberToDigits 0000009f
 DEF  PulseEdgeCtrL r0
-DEF  QCtrL        r24
+CSEG _timer_isr_end 0000000d
 DEF  PulseEdgeCtrH r1
-DEF  QCtrH        r25
-CSEG CLEAR        00000036
-CSEG NumberToDigits 0000003a
-EQU  Time         00000001
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
 DEF  Digit_0      r2
 DEF  Digit_1      r3
 DEF  Digit_2      r4
 DEF  Digit_3      r5
-DEF  RL           r20
-DEF  RH           r21
-DEF  QL           r22
-DEF  QH           r23
-CSEG MainLoop     0000002e
-CSEG SetDigit     0000006c
-CSEG Divide       00000051
-CSEG DIV_RETURN1  00000067
-CSEG DIV_LOOP     0000005b
-CSEG DIV_RETURN   0000006a
-CSEG SET_DIGIT_SUBROUTINE 000000ea
-CSEG DelayInMs    0000010f
-CSEG TurnOnDigit0 000000da
-CSEG LOOP1        000000f8
-CSEG TurnOnDigit1 000000de
-CSEG TurnOnDigit2 000000e2
-CSEG TurnOnDigit3 000000e6
-CSEG DigitTo7segCode 00000103
-CSEG DIGITNUMBER  00000100
-CSEG SegCode      00000109
-CSEG DelayOneMs   0000011d
-CSEG Return       0000011c
-CSEG LOOP         00000121
+DEF  QCtrL        r24
+DEF  QCtrH        r25
+CSEG MainLoop     00000028
+CSEG SegNumber    000000cb
+CSEG DigitTo7segCode 000000d2
+CSEG DelayInMs    000000dc
+CSEG Divide       000000ba
+CSEG DivideLoop   000000be
+CSEG DivideEnd    000000c6
+CSEG SegNumberData 000000d0
+CSEG SevenSegCodeData 000000d7
+CSEG DelayInMsEnd 000000e6
+CSEG DelayInMsLoop 000000e2
+CSEG DelayOneMs   000000e9
+CSEG DelayOneMsLoop 000000ed
+CSEG DelayOneMsEnd 000000f1

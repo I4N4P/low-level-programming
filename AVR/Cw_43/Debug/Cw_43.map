@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Fri Oct 23 21:36:22 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Mon Oct 26 18:57:50 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -405,10 +405,10 @@ EQU  SPIEN        00000005
 EQU  DWEN         00000006
 EQU  RSTDISBL     00000007
 EQU  SELFPRGEN    00000000
-DEF  XH           r17
-DEF  XL           r16
-DEF  YH           r19
-DEF  YL           r18
+DEF  XH           r27
+DEF  XL           r26
+DEF  YH           r29
+DEF  YL           r28
 DEF  ZH           r31
 DEF  ZL           r30
 EQU  FLASHEND     000003ff
@@ -448,16 +448,22 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-DEF  RL           r20
-DEF  RH           r21
-DEF  QL           r22
-DEF  QH           r23
+DEF  XLL          r16
+DEF  XHH          r17
+DEF  YLL          r18
+DEF  YHH          r19
+DEF  RL           r16
+DEF  RH           r17
+DEF  QL           r18
+DEF  QH           r19
 DEF  QCtrL        r24
 DEF  QCtrH        r25
 DEF  Dig0         r26
 DEF  Dig1         r27
 DEF  Dig2         r28
 DEF  Dig3         r29
-CSEG mainloop     00000000
-CSEG NumberToDigits 00000003
-CSEG Divide       0000001a
+CSEG MainLoop     00000000
+CSEG NumberToDigits 00000004
+CSEG Divide       00000015
+CSEG DivideLoop   00000017
+CSEG DivideEnd    0000001f

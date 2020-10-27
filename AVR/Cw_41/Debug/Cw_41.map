@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm Fri Oct 16 19:43:07 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm Mon Oct 26 16:41:13 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,7 +448,7 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-EQU  Time         00000001
+EQU  Time         000000fa
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
 DEF  Digit_0      r2
@@ -456,16 +456,14 @@ DEF  Digit_1      r3
 DEF  Digit_2      r4
 DEF  Digit_3      r5
 CSEG MainLoop     0000000f
-CSEG SET_DIGIT_SUBROUTINE 0000009c
-CSEG DelayInMs    000000c1
-CSEG TurnOnDigit0 0000008c
-CSEG LOOP1        000000aa
-CSEG TurnOnDigit1 00000090
-CSEG TurnOnDigit2 00000094
-CSEG TurnOnDigit3 00000098
-CSEG DigitTo7segCode 000000b5
-CSEG DIGITNUMBER  000000b2
-CSEG SegCode      000000bb
-CSEG DelayOneMs   000000cf
-CSEG Return       000000ce
-CSEG LOOP         000000d3
+CSEG SetDigit     00000020
+CSEG SegNumber    00000081
+CSEG DigitTo7segCode 00000088
+CSEG DelayInMs    00000092
+CSEG SegNumberData 00000086
+CSEG SevenSegCodeData 0000008d
+CSEG DelayInMsEnd 0000009c
+CSEG DelayInMsLoop 00000098
+CSEG DelayOneMs   0000009f
+CSEG DelayOneMsLoop 000000a3
+CSEG DelayOneMsEnd 000000a7

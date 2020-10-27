@@ -5,30 +5,25 @@
 ; Author : IAmTheProgramer
 ;
 
-
-; Replace with your application code
-
- // Program odczytuje 4 bajty z tablicy sta³ych zdefiniowanej w pamiêci kodu do rejestrów R20..R23
- .MACRO DigitTo7segCode
-    LDI R16,@0
-    PUSH R16
-    RCALL DigitTo7segCode_SUBROUTINE
-    POP R16
- .ENDMACRO
+ 
+             .MACRO DigitTo7segCode
+                PUSH R16
+                LDI R16,@0
+                RCALL DigitTo7segCodeSub
+                POP R16
+             .ENDMACRO
 
 
 
-LOOP:
-DigitTo7segCode 1
-RJMP LOOP
+MainLoop:
+            DigitTo7segCode 1
+            RJMP MainLoop
  
 
-DigitTo7segCode_SUBROUTINE:
-ldi R30, low(Table1<<1) // inicjalizacja rejestru Z
-ldi R31, high(Table1<<1)
-POP R16
-ADD R30,R16// inkrementacja Z
-lpm R16, Z // odczyt 2 sta³ej
-PUSH R16    
-RET
-Table1: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F                   
+DigitTo7segCodeSub:
+            LDI R30, LOW(SevenSegCodeData<<1) 
+            LDI R31, HIGH(SevenSegCodeData<<1)
+            ADD R30,R16
+            LPM R16,Z     
+            RET
+            SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F                   

@@ -22,8 +22,10 @@
   <FILE>Cw_43.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <mainloop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>32</LINE></mainloop>
-  <NumberToDigits><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>37</LINE></NumberToDigits>
-  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>63</LINE></Divide>
+  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>22</LINE></MainLoop>
+  <NumberToDigits><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>29</LINE></NumberToDigits>
+  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>49</LINE></Divide>
+  <DivideLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>52</LINE></DivideLoop>
+  <DivideEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm</FILE><LINE>61</LINE></DivideEnd>
  </LABELS>
 </ASSEMBLER_INFO>

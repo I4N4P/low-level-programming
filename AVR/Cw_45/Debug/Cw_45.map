@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm Fri Oct 23 23:18:04 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm Mon Oct 26 23:54:47 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,9 +448,8 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-CSEG _main        0000001c
+CSEG _main        00000007
 CSEG _timer_isr   00000005
-EQU  Time         00000001
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
 DEF  Digit_0      r2
@@ -459,30 +458,28 @@ DEF  Digit_2      r4
 DEF  Digit_3      r5
 DEF  PulseEdgeCtrL r0
 DEF  PulseEdgeCtrH r1
-DEF  RL           r20
-DEF  RH           r21
-DEF  QL           r22
-DEF  QH           r23
+DEF  XLL          r16
+DEF  XHH          r17
+DEF  YLL          r18
+DEF  YHH          r19
+DEF  RL           r16
+DEF  RH           r17
+DEF  QL           r18
+DEF  QH           r19
 DEF  QCtrL        r24
 DEF  QCtrH        r25
-CSEG MainLoop     0000001c
-CSEG CLEAR        00000036
-CSEG NumberToDigits 00000039
-CSEG SetDigit     0000006b
-CSEG DelayInMs    0000010e
-CSEG Divide       00000050
-CSEG DIV_RETURN1  00000066
-CSEG DIV_LOOP     0000005a
-CSEG DIV_RETURN   00000069
-CSEG SET_DIGIT_SUBROUTINE 000000e9
-CSEG TurnOnDigit0 000000d9
-CSEG LOOP1        000000f7
-CSEG TurnOnDigit1 000000dd
-CSEG TurnOnDigit2 000000e1
-CSEG TurnOnDigit3 000000e5
-CSEG DigitTo7segCode 00000102
-CSEG DIGITNUMBER  000000ff
-CSEG SegCode      00000108
-CSEG DelayOneMs   0000011c
-CSEG Return       0000011b
-CSEG LOOP         00000120
+CSEG MainLoop     00000019
+CSEG NumberToDigits 00000095
+CSEG SegNumber    000000b9
+CSEG DigitTo7segCode 000000c0
+CSEG DelayInMs    000000ca
+CSEG Divide       000000a6
+CSEG DivideLoop   000000aa
+CSEG DivideEnd    000000b2
+CSEG SegNumberData 000000be
+CSEG SevenSegCodeData 000000c5
+CSEG DelayInMsEnd 000000d4
+CSEG DelayInMsLoop 000000d0
+CSEG DelayOneMs   000000d7
+CSEG DelayOneMsLoop 000000db
+CSEG DelayOneMsEnd 000000df

@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm Thu Oct 15 14:00:09 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm Mon Oct 26 14:17:39 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -666,36 +666,37 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Cw_35.asm
+                                 ; Cw_36.asm
                                  ;
                                  ; Created: 09.10.2020 17:11:35
                                  ; Author : IAmTheProgramer
                                  ;
                                  
+                                          .MACRO EXPONENT
+                                             PUSH R16
+                                             LDI R16,@0
+                                             RCALL EXPONENT_SUBROUTINE
+                                             POP R16
+                                          .ENDMACRO
                                  
-                                 ; Replace with your application code
                                  
-                                  // Program odczytuje 4 bajty z tablicy sta³ych zdefiniowanej w pamiêci kodu do rejestrów R20..R23
-                                  .MACRO CONVERT
-                                     LDI R16,@0
-                                     RCALL CONVERT_SUBROUTINE
-                                  .ENDMACRO
-                                  .DEF I=R17
-                                 LOOP:
-000000 e001
-000001 d001                      CONVERT 1
-000002 cffd                      RJMP LOOP
+                                   MainLoop:
+000000 930f
+000001 e00b
+000002 d002
+000003 910f                                  EXPONENT 11
+000004 cffb                                  RJMP MainLoop
                                   
-                                 CONVERT_SUBROUTINE:
-000003 e1e0                      ldi R30, low(Table1<<1) // inicjalizacja rejestru Z
-000004 e0f0                      ldi R31, high(Table1<<1)
-000005 0fe0                      ADD R30,R16// inkrementacja Z
-000006 9104                      lpm R16, Z // odczyt 2 sta³ej    
-000007 9508                      RET
-000008 0100
-000009 0904
-00000a 1910
-00000b 3124
+                                             EXPONENT_SUBROUTINE:
+000005 e1e4                                  LDI R30, LOW(ExponentData<<1) 
+000006 e0f0                                  LDI R31, HIGH(ExponentData<<1)
+000007 0fe0                                  ADD R30,R16
+000008 9104                                  LPM R16, Z    
+000009 9508                                  RET
+00000a 0100
+00000b 0904
+00000c 1910
+00000d 3124
 
 
 RESOURCE USE INFORMATION
@@ -715,7 +716,7 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   3 r17:   0 r18:   0 r19:   0 r20:   0 
+r13:   0 r14:   0 r15:   0 r16:   5 r17:   0 r18:   0 r19:   0 r20:   0 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   2 r31:   1 
 Registers used: 4 out of 35 (11.4%)
@@ -732,19 +733,19 @@ clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
 inc   :   0 ld    :   0 ldd   :   0 ldi   :   3 lds   :   0 lpm   :   2 
 lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   0 
-or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   1 
+or    :   0 ori   :   0 out   :   0 pop   :   1 push  :   1 rcall :   1 
 ret   :   1 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 6 out of 105 (5.7%)
+Instructions used: 8 out of 105 (7.6%)
 
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00001a     16     10     26    2048   1.3%
+[.cseg] 0x000000 0x00001e     20     10     30    2048   1.5%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

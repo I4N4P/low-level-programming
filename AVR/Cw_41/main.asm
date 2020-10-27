@@ -6,180 +6,135 @@
 ;
 
 
-; Replace with your application code
+                  .MACRO SET_DIGIT
+                    PUSH R16
+                    PUSH R17
+                    LDI R17,@0 
+                    RCALL SegNumber
+                    SBRC R17,1
+                    MOV R16,Digit_0
+                    SBRC R17,2
+                    MOV R16,Digit_1
+                    SBRC R17,3
+                    MOV R16,Digit_2
+                    SBRC R17,4
+                    MOV R16,Digit_3
+                    RCALL DigitTo7segCode 
+                    OUT Segments_P,R16
+                    OUT Digits_P,R17
+                    POP R17
+                    POP R16
+                  .ENDMACRO
 
-    .MACRO DELAY
-        PUSH r16             ;Poœlij na STOSU Rejestry które u¿ywane s¹ w delay
-        PUSH R17                    
-        LDI R16,LOW(@0)      ;Liczba milisekund <1,255> LSB
-        LDI R17,HIGH(@0)     ;Liczba milisekund <0,255> MSB
-        PUSH R17             ;Poœlij na STOSU zabezpieczenie rejestrów przed nadpisaniem    
-        PUSH R16
-        RCALL DelayInMs
-        POP R17              ;Odkrycie STOSU     
-        POP R16
-        POP r17              ;odczytanie pierwotnych wartoœci w rejestrze
-        POP R16                  
-    .ENDMACRO
+                 .MACRO DELAY
+                    PUSH R16
+                    PUSH R17
+                    LDI R16,LOW(@0)   
+                    LDI R17,HIGH(@0)  
+                    RCALL DelayInMs
+                    POP R17
+                    POP R16
+                .ENDMACRO
+              
+                .EQU Digits_P=PORTB     
+                .EQU Segments_P=PORTD    
+                .DEF Digit_0 = R2
+                .DEF Digit_1 = R3
+                .DEF Digit_2 = R4
+                .DEF Digit_3 = R5
 
-    .MACRO SET_DIGIT
-        PUSH R16
-        PUSH R17
-        PUSH R18
-        PUSH R30
-        PUSH R31
-        LDI R17,@0
-        STS 0x60,R17 
-        RCALL SET_DIGIT_SUBROUTINE 
-        OUT Digits_P,R17
-        OUT Segments_P,R16
-        POP R16
-        POP R17
-        POP R18
-        POP R30
-        POP R31
-    .ENDMACRO
+                LDI R16,0
+                MOV Digit_0,R16
+                LDI R16,0
+                MOV Digit_1,R16
+                LDI R16,0
+                MOV Digit_2,R16
+                LDI R16,0
+                MOV Digit_3,R16
+                LDI R16,0x7F             
+                LDI R17,2
+                CLR R20
+                OUT DDRD,R16
+                OUT Segments_P,R16
+                OUT DDRB,R17
+                LDI R16,10
+                
+       MainLoop:   
+                INC Digit_3
+                CP R16,Digit_3
+                BRNE SetDigit
+                CLR Digit_3
+                INC Digit_2
+                CP R16,Digit_2
+                BRNE SetDigit
+                CLR Digit_2
+                INC Digit_1
+                CP R16,Digit_1
+                BRNE SetDigit
+                CLR Digit_1
+                INC Digit_0
+                CP R16,Digit_1
+                BRNE SetDigit
+                CLR Digit_0
+                RJMP MainLoop
+       SetDigit:                
+                SET_DIGIT 0 
+                DELAY 10        
+                SET_DIGIT 1
+                DELAY 10         
+                SET_DIGIT 2    
+                DELAY 30    
+                SET_DIGIT 3       
+                DELAY 20
+                RJMP MainLoop
+               
 
-    .EQU Time=1
-    .EQU Digits_P=PORTB      ;Zmiana nazwy PortB
-    .EQU Segments_P=PORTD    ;zapalenie odpowiednich segmentów
-    .DEF Digit_0 = R2
-    .DEF Digit_1 = R3
-    .DEF Digit_2 = R4
-    .DEF Digit_3 = R5
-
-    LDI R16,0
-    MOV Digit_0,R16
-    LDI R16,0
-    MOV Digit_1,R16
-    LDI R16,0
-    MOV Digit_2,R16
-    LDI R16,0
-    MOV Digit_3,R16
-    LDI R16,0x7F             
-    LDI R17,2
-    OUT DDRD,R16
-    OUT Segments_P,R16
-    OUT DDRB,R17
-    OUT Digits_P,R20
-    LDI R16,10
-  MainLoop:   
-                 
-    SET_DIGIT 0 
-    DELAY 10        //ZAPALENIE WYSWIETLACZA 0 I CYFRY DO NIEGO PRZYPISANEJ
-    SET_DIGIT 1
-    DELAY 10         //ZAPALENIE WYSWIETLACZA 1 I CYFRY DO NIEGO PRZYPISANEJ
-    SET_DIGIT 2    
-    DELAY 30     //ZAPALENIE WYSWIETLACZA 2 I CYFRY DO NIEGO PRZYPISANEJ
-    SET_DIGIT 3         //ZAPALENIE WYSWIETLACZA 3 I CYFRY DO NIEGO PRZYPISANEJ
-    DELAY 20
-    INC Digit_3
-    CPSE R16,Digit_3
-    rjmp MainLoop
-    CLR Digit_3
-    INC Digit_2
-    CPSE R16,Digit_2
-    RJMP MainLoop
-    CLR Digit_2
-    INC Digit_1
-    CPSE R16,Digit_1
-    RJMP MainLoop
-    CLR Digit_1
-    INC Digit_0
-    CPSE R16,Digit_1
-    RJMP MainLoop
-    CLR Digit_0
-  rjmp MainLoop
-
-  TurnOnDigit0:
-    MOV R16,Digit_0
-    STS 0x61,R16
-    RJMP LOOP1
-  TurnOnDigit1:
-    MOV R16,Digit_1
-    STS 0x61,R16
-    RJMP LOOP1
-  TurnOnDigit2:
-    MOV R16,Digit_2
-    STS 0x61,R16
-    RJMP LOOP1
-  TurnOnDigit3:
-    MOV R16,Digit_3
-    STS 0x61,R16
-    RJMP LOOP1
-
-  SET_DIGIT_SUBROUTINE:
-    LDI R18,0
-    LDS R17,0x60
-    CP R17,R18
-    BREQ TurnOnDigit0
-    INC R18
-    CP R17,R18
-    BREQ TurnOnDigit1
-    INC R18
-    CP R17,R18
-    BREQ TurnOnDigit2
-    INC R18
-    CP R17,R18
-    BREQ TurnOnDigit3
-    LOOP1: NOP
-    RCALL DigitTo7segCode 
-    ldi R30, low(DIGITNUMBER<<1) // inicjalizacja rejestru Z
-    ldi R31, high(DIGITNUMBER<<1)
-    LDS R17,0x60
-    ADD R30,R17                 // inkrementacja Z
-    lpm R17, Z                  // odczyt ODPOWIEDNIEJ sta³ej  
-    DIGITNUMBER: .db 2,4,8,16   //NUMER WYSWITLACZA
-  RET
-        
-
-  DigitTo7segCode:
-    ldi R30, low(SegCode<<1) // inicjalizacja rejestru Z
-    ldi R31, high(SegCode<<1)
-    LDS R16,0x61
-    ADD R30,R16// inkrementacja Z
-    lpm R16, Z // odczyt 2 sta³ej  
-    SegCode: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F //0,1,2,3,4,5,6,7,8,9 <- 7-SEG 
-  RET
-        
+      SegNumber:
+                LDI R30, LOW(SegNumberData<<1) 
+                LDI R31, HIGH(SegNumberData<<1)
+                ADD R30,R17
+                LPM R17,Z     
+                RET
+                SegNumberData: .db 2, 4, 8, 16
 
 
+      DigitTo7segCode:
+                LDI R30, LOW(SevenSegCodeData<<1) 
+                LDI R31, HIGH(SevenSegCodeData<<1)
+                ADD R30,R16
+                LPM R16,Z     
+                RET
+                SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F     
 
-  DelayInMs: 
-    PUSH R17                ;Poœlij na STOSU     
-    PUSH R16  
-    RCALL DelayOneMs
-    POP R16                 ;POBIERZ ZE STOSU
-    POP R17            
-    DEC R16
-    BRBC 1,DelayInMs    ; skok jesli R16 wiekszy od 0 , pomija jesli r16=0
-    INC R17             ;zapenia dobre dzia³anie w momencie kiedy r17=0
-    DEC R17
-    BRBS 1,Return   ; skok jesli R17 = 0 pomija jesli r17=!0
-    LDI R16,255
-    DEC R17
-    RJMP DelayInMs
-  Return:RET  
-  DelayOneMs:         
-    LDI R17,4
-    PUSH R17
-    LDI R16,118
-    PUSH R16   
-  LOOP:NOP
-    NOP
-    POP R16
-    DEC R16
-    PUSH R16
-    BRBC 1,LOOP        ; skok jesli wiekszy od 0 pomija jesli r21=0
-    POP R16
-    POP R17
-    DEC R17  
-    PUSH R17
-    PUSH R16
-    BRBC 1,LOOP         ; skok jesli wiekszy od 0 pomija jesli r22=0
-    POP R16
-    POP R17
-    RET                 ;powrót do RCALL DelayOneMs
 
-   
-                     
+      DelayInMs: 
+                 PUSH R24
+                 PUSH R25
+                 MOV R24,R16
+                 MOV R25,R17 
+                 SBIW R24,0
+                 BRBS 1,DelayInMsEnd
+      DelayInMsLoop:
+                 RCALL DelayOneMs
+                 SBIW R24,1
+                 BRBS 1,DelayInMsEnd
+                 RJMP DelayInMsLoop
+      DelayInMsEnd:
+                 POP R25
+                 POP R24
+                 RET
+
+      DelayOneMs:
+                 PUSH R24
+                 PUSH R25
+                 LDI R24,52
+                 LDI R25,5
+      DelayOneMsLoop:
+                 NOP
+                 SBIW R24,1
+                 BRBS 1,DelayOneMsEnd
+                 RJMP DelayOneMsLoop
+      DelayOneMsEnd:
+                 POP R25
+                 POP R24
+                 RET 

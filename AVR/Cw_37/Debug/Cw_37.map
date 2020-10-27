@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm Thu Oct 15 14:00:09 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm Mon Oct 26 14:17:39 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,7 +448,6 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-DEF  I            r17
-CSEG LOOP         00000000
-CSEG CONVERT_SUBROUTINE 00000003
-CSEG Table1       00000008
+CSEG MainLoop     00000000
+CSEG EXPONENT_SUBROUTINE 00000005
+CSEG ExponentData 0000000a

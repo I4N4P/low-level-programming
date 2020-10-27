@@ -22,8 +22,8 @@
   <FILE>Cw_37.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <LOOP><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>17</LINE></LOOP>
-  <CONVERT_SUBROUTINE><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>21</LINE></CONVERT_SUBROUTINE>
-  <Table1><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>27</LINE></Table1>
+  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>16</LINE></MainLoop>
+  <EXPONENT_SUBROUTINE><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>20</LINE></EXPONENT_SUBROUTINE>
+  <ExponentData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_37\main.asm</FILE><LINE>26</LINE></ExponentData>
  </LABELS>
 </ASSEMBLER_INFO>

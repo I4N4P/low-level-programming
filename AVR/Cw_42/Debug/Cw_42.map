@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm Fri Oct 23 22:05:35 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_42\main.asm Mon Oct 26 18:54:36 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,13 +448,16 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-DEF  RL           r20
-DEF  RH           r21
-DEF  QL           r22
-DEF  QH           r23
+DEF  XLL          r16
+DEF  XHH          r17
+DEF  YLL          r18
+DEF  YHH          r19
+DEF  RL           r16
+DEF  RH           r17
+DEF  QL           r18
+DEF  QH           r19
 DEF  QCtrL        r24
 DEF  QCtrH        r25
 CSEG Divide       00000000
-CSEG DIV_RETURN1  0000001a
-CSEG DIV_LOOP     0000000e
-CSEG DIV_RETURN   0000001d
+CSEG DivideLoop   00000006
+CSEG DivideEnd    0000000e

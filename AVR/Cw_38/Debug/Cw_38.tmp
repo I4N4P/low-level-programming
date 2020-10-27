@@ -22,8 +22,8 @@
   <FILE>Cw_38.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <LOOP><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>21</LINE></LOOP>
-  <DigitTo7segCode_SUBROUTINE><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>26</LINE></DigitTo7segCode_SUBROUTINE>
-  <Table1><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>34</LINE></Table1>
+  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>18</LINE></MainLoop>
+  <DigitTo7segCodeSub><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>23</LINE></DigitTo7segCodeSub>
+  <SevenSegCodeData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_38\main.asm</FILE><LINE>29</LINE></SevenSegCodeData>
  </LABELS>
 </ASSEMBLER_INFO>

@@ -22,19 +22,17 @@
   <FILE>Cw_41.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>66</LINE></MainLoop>
-  <SET_DIGIT_SUBROUTINE><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>111</LINE></SET_DIGIT_SUBROUTINE>
-  <DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>148</LINE></DelayInMs>
-  <TurnOnDigit0><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>94</LINE></TurnOnDigit0>
-  <LOOP1><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>125</LINE></LOOP1>
-  <TurnOnDigit1><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>98</LINE></TurnOnDigit1>
-  <TurnOnDigit2><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>102</LINE></TurnOnDigit2>
-  <TurnOnDigit3><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>106</LINE></TurnOnDigit3>
-  <DigitTo7segCode><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>136</LINE></DigitTo7segCode>
-  <DIGITNUMBER><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>132</LINE></DIGITNUMBER>
-  <SegCode><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>142</LINE></SegCode>
-  <DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>163</LINE></DelayOneMs>
-  <Return><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>162</LINE></Return>
-  <LOOP><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>168</LINE></LOOP>
+  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>63</LINE></MainLoop>
+  <SetDigit><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>82</LINE></SetDigit>
+  <SegNumber><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>94</LINE></SegNumber>
+  <DigitTo7segCode><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>103</LINE></DigitTo7segCode>
+  <DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>112</LINE></DelayInMs>
+  <SegNumberData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>100</LINE></SegNumberData>
+  <SevenSegCodeData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>109</LINE></SevenSegCodeData>
+  <DelayInMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>124</LINE></DelayInMsEnd>
+  <DelayInMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>119</LINE></DelayInMsLoop>
+  <DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>129</LINE></DelayOneMs>
+  <DelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>134</LINE></DelayOneMsLoop>
+  <DelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_41\main.asm</FILE><LINE>139</LINE></DelayOneMsEnd>
  </LABELS>
 </ASSEMBLER_INFO>
