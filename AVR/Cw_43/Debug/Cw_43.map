@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Mon Oct 26 18:57:50 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Tue Oct 27 12:00:00 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -464,6 +464,6 @@ DEF  Dig2         r28
 DEF  Dig3         r29
 CSEG MainLoop     00000000
 CSEG NumberToDigits 00000004
-CSEG Divide       00000015
-CSEG DivideLoop   00000017
-CSEG DivideEnd    0000001f
+CSEG Divide       00000010
+CSEG DivideLoop   00000012
+CSEG DivideEnd    0000001a

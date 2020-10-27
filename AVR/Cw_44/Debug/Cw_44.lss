@@ -1,11 +1,7 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm Tue Oct 27 00:04:29 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm Tue Oct 27 17:12:33 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm(55): warning: Register r16 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm(56): warning: Register r17 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm(57): warning: Register r18 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_44\main.asm(58): warning: Register r19 already defined by the .DEF directive
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
                                  
                                  ;
@@ -683,7 +679,7 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                                    PUSH R30
                                                    PUSH R31
                                                    LDI R17,@0 
-                                                   RCALL SegNumber
+                                                   RCALL DigitNumber
                                                    SBRC R17,1
                                                    MOV R16,Digit_0
                                                    SBRC R17,2
@@ -692,7 +688,8 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                                    MOV R16,Digit_2
                                                    SBRC R17,4
                                                    MOV R16,Digit_3
-                                                   RCALL DigitTo7segCode 
+                                                   RCALL DigitTo7segCode
+                                                   DELAY 1 
                                                    OUT Segments_P,R16
                                                    OUT Digits_P,R17
                                                    POP R31
@@ -719,255 +716,273 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                                  .DEF Digit_3 = R5
                                                  .DEF PulseEdgeCtrL=R0
                                                  .DEF PulseEdgeCtrH=R1
-                                                 .DEF XLL=R16 
-                                                 .DEF XHH=R17
-                                                 .DEF YLL=R18 
-                                                 .DEF YHH=R19
-                                                 .DEF RL=R16 
-                                                 .DEF RH=R17
-                                                 .DEF QL=R18 
-                                                 .DEF QH=R19
                                                  .DEF QCtrL=R24
                                                  .DEF QCtrH=R25
                                  
-000000 e000                                      LDI R16,0
+000000 2700                                      CLR R16
 000001 2e20                                      MOV Digit_0,R16
-000002 e000                                      LDI R16,0
-000003 2e30                                      MOV Digit_1,R16
-000004 e000                                      LDI R16,0
-000005 2e40                                      MOV Digit_2,R16
-000006 e000                                      LDI R16,0
-000007 2e50                                      MOV Digit_3,R16
-000008 e70f                                      LDI R16,0x7F             
-000009 e012                                      LDI R17,2
-00000a 2744                                      CLR R20
-00000b bb01                                      OUT DDRD,R16
-00000c bb02                                      OUT Segments_P,R16
-00000d bb17                                      OUT DDRB,R17
-00000e e08f                                      LDI QCtrL,LOW(9999)
-00000f e297                                      LDI QCtrH,HIGH(9999)
-000010 2400                                      CLR PulseEdgeCtrL
-000011 2411                                      CLR PulseEdgeCtrH
+000002 2e30                                      MOV Digit_1,R16
+000003 2e40                                      MOV Digit_2,R16
+000004 2e50                                      MOV Digit_3,R16
+000005 e70f                                      LDI R16,0x7F             
+000006 e012                                      LDI R17,2
+000007 bb01                                      OUT DDRD,R16
+000008 bb02                                      OUT Segments_P,R16
+000009 bb17                                      OUT DDRB,R17
+00000a e180                                      LDI QCtrL,LOW(10000)
+00000b e297                                      LDI QCtrH,HIGH(10000)
+00000c e001                                      LDI R16,1
+00000d 2711                                      CLR R17
+                                    ClearCounter:
+00000e 2400                                      CLR PulseEdgeCtrL
+00000f 2411                                      CLR PulseEdgeCtrH
                                        MainLoop:   
-000012 1608                                      CP PulseEdgeCtrL,QCtrL
-000013 0619                                      CPC PulseEdgeCtrH,QCtrH
-000014 f3d9                                      BREQ MainLoop-2
-000015 2d11                                      MOV XHH,PulseEdgeCtrH
-000016 2d00                                      MOV XLL,PulseEdgeCtrL
-000017 d075                                      RCALL NumberToDigits
-000018 930f
-000019 931f
-00001a 93ef
-00001b 93ff
-00001c e010
-00001d d093
-00001e fd11
-00001f 2d02
-000020 fd12
-000021 2d03
-000022 fd13
-000023 2d04
-000024 fd14
-000025 2d05
-000026 d091
-000027 bb02
-000028 bb18
-000029 91ff
-00002a 91ef
-00002b 911f
-00002c 910f                                      SET_DIGIT 0
-00002d 930f
-00002e 931f
-00002f e005
-000030 e010
-000031 d090
-000032 911f
-000033 910f                                      DELAY 5
-000034 930f
-000035 931f
-000036 93ef
-000037 93ff
-000038 e011
-000039 d077
-00003a fd11
-00003b 2d02
-00003c fd12
-00003d 2d03
-00003e fd13
-00003f 2d04
-000040 fd14
-000041 2d05
-000042 d075
-000043 bb02
-000044 bb18
-000045 91ff
-000046 91ef
-000047 911f
-000048 910f                                      SET_DIGIT 1
-000049 930f
-00004a 931f
-00004b e005
-00004c e010
-00004d d074
-00004e 911f
-00004f 910f                                      DELAY 5
-000050 930f
-000051 931f
-000052 93ef
-000053 93ff
-000054 e012
-000055 d05b
-000056 fd11
-000057 2d02
-000058 fd12
-000059 2d03
-00005a fd13
-00005b 2d04
-00005c fd14
-00005d 2d05
-00005e d059
-00005f bb02
-000060 bb18
-000061 91ff
-000062 91ef
-000063 911f
-000064 910f                                      SET_DIGIT 2
-000065 930f
-000066 931f
-000067 e005
-000068 e010
-000069 d058
-00006a 911f
-00006b 910f                                      DELAY 5
-00006c 930f
-00006d 931f
-00006e 93ef
-00006f 93ff
-000070 e013
-000071 d03f
-000072 fd11
-000073 2d02
-000074 fd12
-000075 2d03
-000076 fd13
-000077 2d04
-000078 fd14
-000079 2d05
-00007a d03d
-00007b bb02
-00007c bb18
-00007d 91ff
-00007e 91ef
-00007f 911f
-000080 910f                                      SET_DIGIT 3
-000081 930f
-000082 931f
-000083 e005
-000084 e010
-000085 d03c
-000086 911f
-000087 910f                                      DELAY 5
-000088 9403                                      INC PulseEdgeCtrL
-000089 1200                                      CPSE PulseEdgeCtrL,R16
-00008a cf87                                      RJMP MainLoop
-00008b 9413                                      INC PulseEdgeCtrH
-00008c cf85                                      RJMP MainLoop
+000010 1608                                      CP PulseEdgeCtrL,QCtrL
+000011 0619                                      CPC PulseEdgeCtrH,QCtrH
+000012 f7dc                                      BRGE ClearCounter
+000013 d08f                                      RCALL NumberToDigits
+000014 930f
+000015 931f
+000016 93ef
+000017 93ff
+000018 e010
+000019 d0b0
+00001a fd11
+00001b 2d02
+00001c fd12
+00001d 2d03
+00001e fd13
+00001f 2d04
+000020 fd14
+000021 2d05
+000022 d0ae
+000023 930f
+000024 931f
+000025 e001
+000026 e010
+000027 d0b3
+000028 911f
+000029 910f
+00002a bb02
+00002b bb18
+00002c 91ff
+00002d 91ef
+00002e 911f
+00002f 910f                                      SET_DIGIT 0
+000030 930f
+000031 931f
+000032 e004
+000033 e010
+000034 d0a6
+000035 911f
+000036 910f                                      DELAY 4
+000037 930f
+000038 931f
+000039 93ef
+00003a 93ff
+00003b e011
+00003c d08d
+00003d fd11
+00003e 2d02
+00003f fd12
+000040 2d03
+000041 fd13
+000042 2d04
+000043 fd14
+000044 2d05
+000045 d08b
+000046 930f
+000047 931f
+000048 e001
+000049 e010
+00004a d090
+00004b 911f
+00004c 910f
+00004d bb02
+00004e bb18
+00004f 91ff
+000050 91ef
+000051 911f
+000052 910f                                      SET_DIGIT 1
+000053 930f
+000054 931f
+000055 e004
+000056 e010
+000057 d083
+000058 911f
+000059 910f                                      DELAY 4
+00005a 930f
+00005b 931f
+00005c 93ef
+00005d 93ff
+00005e e012
+00005f d06a
+000060 fd11
+000061 2d02
+000062 fd12
+000063 2d03
+000064 fd13
+000065 2d04
+000066 fd14
+000067 2d05
+000068 d068
+000069 930f
+00006a 931f
+00006b e001
+00006c e010
+00006d d06d
+00006e 911f
+00006f 910f
+000070 bb02
+000071 bb18
+000072 91ff
+000073 91ef
+000074 911f
+000075 910f                                      SET_DIGIT 2
+000076 930f
+000077 931f
+000078 e004
+000079 e010
+00007a d060
+00007b 911f
+00007c 910f                                      DELAY 4
+00007d 930f
+00007e 931f
+00007f 93ef
+000080 93ff
+000081 e013
+000082 d047
+000083 fd11
+000084 2d02
+000085 fd12
+000086 2d03
+000087 fd13
+000088 2d04
+000089 fd14
+00008a 2d05
+00008b d045
+00008c 930f
+00008d 931f
+00008e e001
+00008f e010
+000090 d04a
+000091 911f
+000092 910f
+000093 bb02
+000094 bb18
+000095 91ff
+000096 91ef
+000097 911f
+000098 910f                                      SET_DIGIT 3
+000099 930f
+00009a 931f
+00009b e004
+00009c e010
+00009d d03d
+00009e 911f
+00009f 910f                                      DELAY 4 
+0000a0 0e00                                      ADD PulseEdgeCtrL,R16
+0000a1 1e11                                      ADC PulseEdgeCtrH,R17
+0000a2 cf6d                                      RJMP MainLoop
                                  
                                   NumberToDigits:
-00008d e033                                      LDI  YHH,HIGH(1000)
-00008e ee28                                      LDI  YLL,LOW(1000)
-00008f d00e                                      RCALL Divide
-000090 2e22                                      MOV  Digit_0,QL
-000091 e624                                      LDI  YLL,LOW(100)
-000092 e030                                      LDI  YHH,HIGH(100)
-000093 d00a                                      RCALL Divide
-000094 2e32                                      MOV  Digit_1,QL
-000095 e02a                                      LDI  YLL,LOW(10)
-000096 e030                                      LDI  YHH,HIGH(10)
-000097 d006                                      RCALL Divide
-000098 2e42                                      MOV  Digit_2,QL
-000099 e021                                      LDI  YLL,LOW(1)
-00009a e030                                      LDI  YHH,HIGH(1)
-00009b d002                                      RCALL Divide
-00009c 2e52                                      MOV  Digit_3,QL
-00009d 9508                                      RET
+0000a3 93af                                      PUSH XL
+0000a4 93bf                                      PUSH XH
+0000a5 93cf                                      PUSH YL
+0000a6 93df                                      PUSH YH
+0000a7 2db1                                      MOV XH,PulseEdgeCtrH
+0000a8 2da0                                      MOV XL,PulseEdgeCtrL
+0000a9 e0d3                                      LDI  YH,HIGH(1000)
+0000aa eec8                                      LDI  YL,LOW(1000)
+0000ab d00d                                      RCALL Divide
+0000ac 2e2c                                      MOV  Digit_0,YL
+0000ad e6c4                                      LDI  YL,LOW(100)
+0000ae d00a                                      RCALL Divide
+0000af 2e3c                                      MOV  Digit_1,YL
+0000b0 e0ca                                      LDI  YL,LOW(10)
+0000b1 d007                                      RCALL Divide
+0000b2 2e4c                                      MOV  Digit_2,YL  
+0000b3 2e5a                                      MOV  Digit_3,XL
+0000b4 91df                                      POP YH
+0000b5 91cf                                      POP YL
+0000b6 91bf                                      POP XH
+0000b7 91af                                      POP XL
+0000b8 9508                                      RET
                                  
                                      Divide :   
-00009e 939f                                     PUSH R25
-00009f 938f                                     PUSH R24
-0000a0 2788                                     CLR R24
-0000a1 2799                                     CLR R25
+0000b9 939f                                     PUSH R25
+0000ba 938f                                     PUSH R24
+0000bb 2788                                     CLR R24
+0000bc 2799                                     CLR R25
                                      DivideLoop:
-0000a2 1702                                     CP XLL,YLL
-0000a3 0713                                     CPC XHH,YHH
-0000a4 f028                                     BRLO DivideEnd 
-0000a5 9601                                     ADIW QCtrH:QCtrL,1 
-0000a6 1b02                                     SUB XLL,YLL
-0000a7 0b13                                     SBC XHH,YHH
-0000a8 f009                                     BRBS 1,DivideEnd              
-0000a9 cff8                                     RJMP DivideLoop
+0000bd 17ac                                     CP XL,YL
+0000be 07bd                                     CPC XH,YH
+0000bf f028                                     BRLO DivideEnd 
+0000c0 9601                                     ADIW QCtrH:QCtrL,1 
+0000c1 1bac                                     SUB XL,YL
+0000c2 0bbd                                     SBC XH,YH
+0000c3 f009                                     BRBS 1,DivideEnd              
+0000c4 cff8                                     RJMP DivideLoop
                                      DivideEnd: 
-0000aa 2f28                                     MOV QL,QCtrL
-0000ab 2f39                                     MOV QH,QCtrH
-0000ac 2f00                                     MOV RL,XLL
-0000ad 2f11                                     MOV RH,XHH
-0000ae 918f                                     POP R24
-0000af 919f                                     POP R25
-0000b0 9508                                     RET  
+0000c5 2fc8                                     MOV YL,QCtrL
+0000c6 2fd9                                     MOV YH,QCtrH
+0000c7 918f                                     POP R24
+0000c8 919f                                     POP R25
+0000c9 9508                                     RET  
                                  
-                                       SegNumber:
-0000b1 e6ec                                     LDI R30, LOW(SegNumberData<<1) 
-0000b2 e0f1                                     LDI R31, HIGH(SegNumberData<<1)
-0000b3 0fe1                                     ADD R30,R17
-0000b4 9114                                     LPM R17,Z    
-0000b5 9508                                     RET
-0000b6 0402
-0000b7 1008                                     SegNumberData: .db 2, 4, 8, 16
+                                      DigitNumber:
+0000ca e9ee                                     LDI R30, LOW(SegNumberData<<1) 
+0000cb e0f1                                     LDI R31, HIGH(SegNumberData<<1)
+0000cc 0fe1                                     ADD R30,R17
+0000cd 9114                                     LPM R17,Z    
+0000ce 9508                                     RET
+0000cf 0402
+0000d0 1008                                     SegNumberData: .db 2, 4, 8, 16
                                  
                                  
-                                       DigitTo7segCode:
-0000b8 e7ea                                     LDI R30, LOW(SevenSegCodeData<<1) 
-0000b9 e0f1                                     LDI R31, HIGH(SevenSegCodeData<<1)
-0000ba 0fe0                                     ADD R30,R16
-0000bb 9104                                     LPM R16,Z  
-0000bc 9508                                     RET
-0000bd 063f
-0000be 4f5b
-0000bf 6d66
-0000c0 077d
-0000c1 6f7f                                     SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F     
+                                      DigitTo7segCode:
+0000d1 eaec                                     LDI R30, LOW(SevenSegCodeData<<1) 
+0000d2 e0f1                                     LDI R31, HIGH(SevenSegCodeData<<1)
+0000d3 0fe0                                     ADD R30,R16
+0000d4 9104                                     LPM R16,Z  
+0000d5 9508                                     RET
+0000d6 063f
+0000d7 4f5b
+0000d8 6d66
+0000d9 077d
+0000da 6f7f                                     SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F     
                                  
                                  
                                        DelayInMs: 
-0000c2 938f                                     PUSH R24
-0000c3 939f                                     PUSH R25
-0000c4 2f80                                     MOV R24,R16
-0000c5 2f91                                     MOV R25,R17 
-0000c6 9700                                     SBIW R24,0
-0000c7 f021                                     BRBS 1,DelayInMsEnd
+0000db 938f                                     PUSH R24
+0000dc 939f                                     PUSH R25
+0000dd 2f80                                     MOV R24,R16
+0000de 2f91                                     MOV R25,R17 
+0000df 9700                                     SBIW R24,0
+0000e0 f021                                     BRBS 1,DelayInMsEnd
                                        DelayInMsLoop:
-0000c8 d006                                     RCALL DelayOneMs
-0000c9 9701                                     SBIW R24,1
-0000ca f009                                     BRBS 1,DelayInMsEnd
-0000cb cffc                                     RJMP DelayInMsLoop
+0000e1 d006                                     RCALL DelayOneMs
+0000e2 9701                                     SBIW R24,1
+0000e3 f009                                     BRBS 1,DelayInMsEnd
+0000e4 cffc                                     RJMP DelayInMsLoop
                                        DelayInMsEnd:
-0000cc 919f                                     POP R25
-0000cd 918f                                     POP R24
-0000ce 9508                                     RET
+0000e5 919f                                     POP R25
+0000e6 918f                                     POP R24
+0000e7 9508                                     RET
                                  
                                        DelayOneMs:
-0000cf 938f                                     PUSH R24
-0000d0 939f                                     PUSH R25
-0000d1 e384                                     LDI R24,52
-0000d2 e095                                     LDI R25,5
+0000e8 938f                                     PUSH R24
+0000e9 939f                                     PUSH R25
+0000ea e384                                     LDI R24,52
+0000eb e095                                     LDI R25,5
                                        DelayOneMsLoop:
-0000d3 0000                                     NOP
-0000d4 9701                                     SBIW R24,1
-0000d5 f009                                     BRBS 1,DelayOneMsEnd
-0000d6 cffc                                     RJMP DelayOneMsLoop
+0000ec 0000                                     NOP
+0000ed 9701                                     SBIW R24,1
+0000ee f009                                     BRBS 1,DelayOneMsEnd
+0000ef cffc                                     RJMP DelayOneMsLoop
                                        DelayOneMsEnd:
-0000d7 919f                                     POP R25
-0000d8 918f                                     POP R24
+0000f0 919f                                     POP R25
+0000f1 918f                                     POP R24
 
 
 RESOURCE USE INFORMATION
@@ -985,39 +1000,39 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATtiny2313" register use summary:
-x  :   0 y  :   0 z  :   2 r0 :   5 r1 :   4 r2 :   6 r3 :   6 r4 :   6 
+x  :   0 y  :   0 z  :   2 r0 :   4 r1 :   4 r2 :   6 r3 :   6 r4 :   6 
 r5 :   6 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  60 r17:  54 r18:  11 r19:   7 r20:   1 
-r21:   0 r22:   0 r23:   0 r24:  16 r25:  13 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:  12 r31:  10 
-Registers used: 16 out of 35 (45.7%)
+r13:   0 r14:   0 r15:   0 r16:  65 r17:  63 r18:   0 r19:   0 r20:   0 
+r21:   0 r22:   0 r23:   0 r24:  16 r25:  13 r26:   6 r27:   5 r28:  11 
+r29:   6 r30:  12 r31:  10 
+Registers used: 17 out of 35 (48.6%)
 
 "ATtiny2313" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   2 adiw  :   1 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   1 add   :   3 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   4 
-brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   1 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
-clh   :   0 cli   :   0 cln   :   0 clr   :   5 cls   :   0 clt   :   0 
+clh   :   0 cli   :   0 cln   :   0 clr   :   6 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   2 cpi   :   0 
-cpse  :   1 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   2 ld    :   0 ldd   :   0 ldi   :  34 lds   :   0 lpm   :   4 
-lsl   :   0 lsr   :   0 mov   :  32 movw  :   0 neg   :   0 nop   :   1 
-or    :   0 ori   :   0 out   :  11 pop   :  30 push  :  30 rcall :  18 
-ret   :   6 reti  :   0 rjmp  :   5 rol   :   0 ror   :   0 sbc   :   1 
+cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :  35 lds   :   0 lpm   :   4 
+lsl   :   0 lsr   :   0 mov   :  30 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :  11 pop   :  42 push  :  42 rcall :  21 
+ret   :   6 reti  :   0 rjmp  :   4 rol   :   0 ror   :   0 sbc   :   1 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   3 sbr   :   0 
 sbrc  :  16 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   1 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 24 out of 105 (22.9%)
+Instructions used: 23 out of 105 (21.9%)
 
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0001b4    422     14    436    2048  21.3%
+[.cseg] 0x000000 0x0001e6    472     14    486    2048  23.7%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 
-Assembly complete, 0 errors, 4 warnings
+Assembly complete, 0 errors, 0 warnings

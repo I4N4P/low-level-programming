@@ -12,21 +12,23 @@
                   .ORG 0x000B RJMP   _Pin_B0_isr
        
        _timer_isr:                   
-                  reti                            
+                  RETI                            
 
        _Pin_B0_isr:
                   PUSH R16
+                  PUSH R17
+                  PUSH R18
+                  IN R18,SREG
+                  LDI R16,1
+                  CLR R17
                   RCALL NumberToDigits
-                  INC PulseEdgeCtrL
-                  CLR R16 
-                  CP PulseEdgeCtrL,R16 
-                  POP R16
-                  BREQ  _Pin_B0_isr_end   
-                  RETI                    
-      _Pin_B0_isr_end:
-                  INC PulseEdgeCtrH             
-                  RETI
-                  
+                  ADD PulseEdgeCtrL,R16
+                  ADC PulseEdgeCtrH,R17 
+                  OUT SREG,R18
+                  POP R18
+                  POP R17
+                  POP R16      
+                  RETI   
 
 
                .MACRO SET_DIGIT
@@ -35,7 +37,7 @@
                   PUSH R30
                   PUSH R31
                   LDI R17,@0 
-                  RCALL SegNumber
+                  RCALL DigitNumber
                   SBRC R17,1
                   MOV R16,Digit_0
                   SBRC R17,2
@@ -44,7 +46,8 @@
                   MOV R16,Digit_2
                   SBRC R17,4
                   MOV R16,Digit_3
-                  RCALL DigitTo7segCode 
+                  RCALL DigitTo7segCode
+                  DELAY 1 
                   OUT Segments_P,R16
                   OUT Digits_P,R17
                   POP R31
@@ -74,7 +77,7 @@
                 .DEF QCtrL=R24
                 .DEF QCtrH=R25
           _main:
-                SEI
+                
                 LDI R16,12
                 OUT TCCR1B,R16
                 LDI R16,high(31250)
@@ -103,49 +106,41 @@
                 LDI R17,2 
                 OUT DDRD,R16
                 OUT Segments_P,R16
-                OUT DDRB,R17  
-                CLR PulseEdgeCtrL
+                OUT DDRB,R17
+                LDI QCtrL,LOW(10000)
+                LDI QCtrH,HIGH(10000)
+                SEI
+   ClearCounter:
                 CLR PulseEdgeCtrL
                 CLR PulseEdgeCtrH
-      MainLoop: 
-                LDI QCtrL,LOW(9999)
-                LDI QCtrH,HIGH(9999)
+      MainLoop:     
                 CP PulseEdgeCtrL,QCtrL
                 CPC PulseEdgeCtrH,QCtrH
-                BREQ MainLoop-2
+                BRGE ClearCounter
                 SET_DIGIT 0
-                DELAY 1
                 SET_DIGIT 1
-                DELAY 1
                 SET_DIGIT 2
-                DELAY 1
-                SET_DIGIT 3
-                DELAY 1 
-                RJMP MainLoop   
-                RETI
+                SET_DIGIT 3  
+                RJMP MainLoop
+
  NumberToDigits:
                 PUSH XL
                 PUSH XH
                 PUSH YL
                 PUSH YH
-                MOV XL,PulseEdgeCtrL
                 MOV XH,PulseEdgeCtrH
+                MOV XL,PulseEdgeCtrL
                 LDI  YH,HIGH(1000)
                 LDI  YL,LOW(1000)
                 RCALL Divide
                 MOV  Digit_0,YL
                 LDI  YL,LOW(100)
-                LDI  YH,HIGH(100)
                 RCALL Divide
                 MOV  Digit_1,YL
                 LDI  YL,LOW(10)
-                LDI  YH,HIGH(10)
                 RCALL Divide
-                MOV  Digit_2,YL
-                LDI  YL,LOW(1)
-                LDI  YH,HIGH(1)
-                RCALL Divide
-                MOV  Digit_3,YL
+                MOV  Digit_2,YL  
+                MOV  Digit_3,XL
                 POP YH
                 POP YL
                 POP XH
@@ -173,7 +168,7 @@
                POP R25
                RET  
 
-      SegNumber:
+    DigitNumber:
                LDI R30, LOW(SegNumberData<<1) 
                LDI R31, HIGH(SegNumberData<<1)
                ADD R30,R17

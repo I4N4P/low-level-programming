@@ -1,18 +1,18 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Mon Oct 26 18:57:50 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm Tue Oct 27 12:00:00 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(10): warning: Register r16 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(11): warning: Register r17 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(12): warning: Register r18 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(13): warning: Register r19 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(18): warning: Register r26 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(19): warning: Register r27 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(20): warning: Register r28 already defined by the .DEF directive
-C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(21): warning: Register r29 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(15): warning: Register r16 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(16): warning: Register r17 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(17): warning: Register r18 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(18): warning: Register r19 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(23): warning: Register r26 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(24): warning: Register r27 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(25): warning: Register r28 already defined by the .DEF directive
+C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_43\main.asm(26): warning: Register r29 already defined by the .DEF directive
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
                                  
-                                 
+                                 ;
                                  
                                  ;***** Created: 2011-02-09 12:04 ******* Source: ATtiny2313.xml **********
                                  ;*************************************************************************
@@ -674,6 +674,11 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
+                                 ; Cw_43.asm
+                                 ;
+                                 ; Created: 09.10.2020 17:11:35
+                                 ; Author : IAmTheProgramer
+                                 ;
                                     
                                  
                                  
@@ -695,8 +700,8 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                                 .def Dig2=R28
                                                 .def Dig3=R29
                                        MainLoop:
-000000 e013                                      LDI  XHH,HIGH(1001)
-000001 ee09                                      LDI  XLL,LOW(1001)
+000000 e01f                                      LDI  XHH,HIGH(4056)
+000001 ed08                                      LDI  XLL,LOW(4056)
 000002 d001                                      RCALL NumberToDigits
 000003 cffc                                      RJMP MainLoop
                                  
@@ -704,43 +709,38 @@ C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR
                                   NumberToDigits:
 000004 e033                                      LDI  YHH,HIGH(1000)
 000005 ee28                                      LDI  YLL,LOW(1000)
-000006 d00e                                      RCALL Divide
+000006 d009                                      RCALL Divide
 000007 2fa2                                      MOV  Dig0,QL
 000008 e624                                      LDI  YLL,LOW(100)
-000009 e030                                      LDI  YHH,HIGH(100)
-00000a d00a                                      RCALL Divide
-00000b 2fb2                                      MOV  Dig1,QL
-00000c e02a                                      LDI  YLL,LOW(10)
-00000d e030                                      LDI  YHH,HIGH(10)
-00000e d006                                      RCALL Divide
-00000f 2fc2                                      MOV  Dig2,QL
-000010 e021                                      LDI  YLL,LOW(1)
-000011 e030                                      LDI  YHH,HIGH(1)
-000012 d002                                      RCALL Divide
-000013 2fd2                                      MOV  Dig3,Ql
-000014 9508                                      RET
+000009 d006                                      RCALL Divide
+00000a 2fb2                                      MOV  Dig1,QL
+00000b e02a                                      LDI  YLL,LOW(10)
+00000c d003                                      RCALL Divide
+00000d 2fc2                                      MOV  Dig2,QL
+00000e 2fd0                                      MOV  Dig3,XLL
+00000f 9508                                      RET
                                  
                                  
                                      Divide :   
-000015 939f                                     PUSH R25
-000016 938f                                     PUSH R24
+000010 939f                                     PUSH R25
+000011 938f                                     PUSH R24
                                      DivideLoop:
-000017 1702                                     CP XLL,YLL
-000018 0713                                     CPC XHH,YHH
-000019 f028                                     BRLO DivideEnd 
-00001a 9601                                     ADIW QCtrH:QCtrL,1 
-00001b 1b02                                     SUB XLL,YLL
-00001c 0b13                                     SBC XHH,YHH
-00001d f009                                     BRBS 1,DivideEnd              
-00001e cff8                                     RJMP DivideLoop
+000012 1702                                     CP XLL,YLL
+000013 0713                                     CPC XHH,YHH
+000014 f028                                     BRLO DivideEnd 
+000015 9601                                     ADIW QCtrH:QCtrL,1 
+000016 1b02                                     SUB XLL,YLL
+000017 0b13                                     SBC XHH,YHH
+000018 f009                                     BRBS 1,DivideEnd              
+000019 cff8                                     RJMP DivideLoop
                                      DivideEnd: 
-00001f 2f28                                     MOV QL,QCtrL
-000020 2f39                                     MOV QH,QCtrH
-000021 2f00                                     MOV RL,XLL
-000022 2f11                                     MOV RH,XHH
-000023 918f                                     POP R24
-000024 919f                                     POP R25
-000025 9508                                     RET
+00001a 2f28                                     MOV QL,QCtrL
+00001b 2f39                                     MOV QH,QCtrH
+00001c 2f00                                     MOV RL,XLL
+00001d 2f11                                     MOV RH,XHH
+00001e 918f                                     POP R24
+00001f 919f                                     POP R25
+000020 9508                                     RET
                                  
                                     
 
@@ -762,7 +762,7 @@ counted separately from r26..r31 here.
 "ATtiny2313" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   5 r17:   5 r18:  11 r19:   7 r20:   0 
+r13:   0 r14:   0 r15:   0 r16:   6 r17:   5 r18:   9 r19:   4 r20:   0 
 r21:   0 r22:   0 r23:   0 r24:   4 r25:   4 r26:   1 r27:   1 r28:   1 
 r29:   1 r30:   0 r31:   0 
 Registers used: 10 out of 35 (28.6%)
@@ -777,9 +777,9 @@ brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0
 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   1 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   0 ld    :   0 ldd   :   0 ldi   :  10 lds   :   0 lpm   :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :   6 lds   :   0 lpm   :   0 
 lsl   :   0 lsr   :   0 mov   :   8 movw  :   0 neg   :   0 nop   :   0 
-or    :   0 ori   :   0 out   :   0 pop   :   2 push  :   2 rcall :   5 
+or    :   0 ori   :   0 out   :   0 pop   :   2 push  :   2 rcall :   4 
 ret   :   2 reti  :   0 rjmp  :   2 rol   :   0 ror   :   0 sbc   :   1 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
@@ -791,7 +791,7 @@ Instructions used: 14 out of 105 (13.3%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00004c     76      0     76    2048   3.7%
+[.cseg] 0x000000 0x000042     66      0     66    2048   3.2%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

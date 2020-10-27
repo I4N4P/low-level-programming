@@ -25,8 +25,8 @@
                .def Dig2=R28
                .def Dig3=R29
       MainLoop:
-                LDI  XHH,HIGH(1001)
-                LDI  XLL,LOW(1001)
+                LDI  XHH,HIGH(4056)
+                LDI  XLL,LOW(4056)
                 RCALL NumberToDigits
                 RJMP MainLoop
 
@@ -37,19 +37,13 @@
                 RCALL Divide
                 MOV  Dig0,QL
                 LDI  YLL,LOW(100)
-                LDI  YHH,HIGH(100)
                 RCALL Divide
                 MOV  Dig1,QL
                 LDI  YLL,LOW(10)
-                LDI  YHH,HIGH(10)
                 RCALL Divide
                 MOV  Dig2,QL
-                LDI  YLL,LOW(1)
-                LDI  YHH,HIGH(1)
-                RCALL Divide
-                MOV  Dig3,Ql
+                MOV  Dig3,XLL
                 RET
-
 
     Divide :   
                PUSH R25

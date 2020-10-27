@@ -55,41 +55,30 @@
                 .DEF Digit_3 = R5
                 .DEF PulseEdgeCtrL=R0
                 .DEF PulseEdgeCtrH=R1
-                .DEF XLL=R16 
-                .DEF XHH=R17
-                .DEF YLL=R18 
-                .DEF YHH=R19
-                .DEF RL=R16 
-                .DEF RH=R17
-                .DEF QL=R18 
-                .DEF QH=R19
                 .DEF QCtrL=R24
                 .DEF QCtrH=R25
           _main:
-                LDI R16,0
+                CLR R16
                 MOV Digit_0,R16
-                LDI R16,0
                 MOV Digit_1,R16
-                LDI R16,0
                 MOV Digit_2,R16
-                LDI R16,0
                 MOV Digit_3,R16
                 LDI R16,0x7F             
                 LDI R17,2
-                CLR R20
                 OUT DDRD,R16
                 OUT Segments_P,R16
                 OUT DDRB,R17
-                LDI QCtrL,LOW(9999)
-                LDI QCtrH,HIGH(9999) 
+                LDI QCtrL,LOW(10000)
+                LDI QCtrH,HIGH(10000)
+                LDI R16,1
+                CLR R17
+   ClearCounter:
                 CLR PulseEdgeCtrL
                 CLR PulseEdgeCtrH
-      MainLoop: 
+      MainLoop:   
                 CP PulseEdgeCtrL,QCtrL
                 CPC PulseEdgeCtrH,QCtrH
-                BREQ MainLoop-2 
-                MOV XHH,PulseEdgeCtrH
-                MOV XLL,PulseEdgeCtrL
+                BREQ ClearCounter
                 RCALL NumberToDigits
                 SET_DIGIT 0
                 DELAY 5
@@ -98,30 +87,33 @@
                 SET_DIGIT 2
                 DELAY 5
                 SET_DIGIT 3
-                DELAY 5 
-                INC PulseEdgeCtrL
-                CPSE PulseEdgeCtrL,R16
+                DELAY 5  
+                ADD PulseEdgeCtrL,R16
+                ADC PulseEdgeCtrH,R17
                 RJMP MainLoop
-                INC PulseEdgeCtrH
-                RJMP MainLoop
-                RETI
+
  NumberToDigits:
-                LDI  YHH,HIGH(1000)
-                LDI  YLL,LOW(1000)
+                PUSH XL
+                PUSH XH
+                PUSH YL
+                PUSH YH
+                MOV XH,PulseEdgeCtrH
+                MOV XL,PulseEdgeCtrL
+                LDI  YH,HIGH(1000)
+                LDI  YL,LOW(1000)
                 RCALL Divide
-                MOV  Digit_0,QL
-                LDI  YLL,LOW(100)
-                LDI  YHH,HIGH(100)
+                MOV  Digit_0,YL
+                LDI  YL,LOW(100)
                 RCALL Divide
-                MOV  Digit_1,QL
-                LDI  YLL,LOW(10)
-                LDI  YHH,HIGH(10)
+                MOV  Digit_1,YL
+                LDI  YL,LOW(10)
                 RCALL Divide
-                MOV  Digit_2,QL
-                LDI  YLL,LOW(1)
-                LDI  YHH,HIGH(1)
-                RCALL Divide
-                MOV  Digit_3,QL
+                MOV  Digit_2,YL  
+                MOV  Digit_3,XL
+                POP YH
+                POP YL
+                POP XH
+                POP XL
                 RET
 
     Divide :   
@@ -130,19 +122,17 @@
                CLR R24
                CLR R25
     DivideLoop:
-               CP XLL,YLL
-               CPC XHH,YHH
+               CP XL,YL
+               CPC XH,YH
                BRLO DivideEnd 
                ADIW QCtrH:QCtrL,1 
-               SUB XLL,YLL
-               SBC XHH,YHH
+               SUB XL,YL
+               SBC XH,YH
                BRBS 1,DivideEnd              
                RJMP DivideLoop
     DivideEnd: 
-               MOV QL,QCtrL
-               MOV QH,QCtrH
-               MOV RL,XLL
-               MOV RH,XHH
+               MOV YL,QCtrL
+               MOV YH,QCtrH
                POP R24
                POP R25
                RET  

@@ -22,22 +22,23 @@
   <FILE>Cw_45.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <_main><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>68</LINE></_main>
+  <_main><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>60</LINE></_main>
   <_timer_isr><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>11</LINE></_timer_isr>
-  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>87</LINE></MainLoop>
-  <NumberToDigits><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>108</LINE></NumberToDigits>
-  <SegNumber><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>150</LINE></SegNumber>
-  <DigitTo7segCode><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>159</LINE></DigitTo7segCode>
-  <DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>168</LINE></DelayInMs>
-  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>127</LINE></Divide>
-  <DivideLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>132</LINE></DivideLoop>
-  <DivideEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>141</LINE></DivideEnd>
-  <SegNumberData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>156</LINE></SegNumberData>
-  <SevenSegCodeData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>165</LINE></SevenSegCodeData>
-  <DelayInMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>180</LINE></DelayInMsEnd>
-  <DelayInMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>175</LINE></DelayInMsLoop>
-  <DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>185</LINE></DelayOneMs>
-  <DelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>190</LINE></DelayOneMsLoop>
-  <DelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>195</LINE></DelayOneMsEnd>
+  <ClearCounter><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>79</LINE></ClearCounter>
+  <MainLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>82</LINE></MainLoop>
+  <NumberToDigits><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>99</LINE></NumberToDigits>
+  <SegNumber><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>144</LINE></SegNumber>
+  <DigitTo7segCode><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>153</LINE></DigitTo7segCode>
+  <DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>162</LINE></DelayInMs>
+  <Divide><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>123</LINE></Divide>
+  <DivideLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>128</LINE></DivideLoop>
+  <DivideEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>137</LINE></DivideEnd>
+  <SegNumberData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>150</LINE></SegNumberData>
+  <SevenSegCodeData><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>159</LINE></SevenSegCodeData>
+  <DelayInMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>174</LINE></DelayInMsEnd>
+  <DelayInMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>169</LINE></DelayInMsLoop>
+  <DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>179</LINE></DelayOneMs>
+  <DelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>184</LINE></DelayOneMsLoop>
+  <DelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm</FILE><LINE>189</LINE></DelayOneMsEnd>
  </LABELS>
 </ASSEMBLER_INFO>

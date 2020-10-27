@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_39\main.asm Mon Oct 26 16:17:47 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_39\main.asm Tue Oct 27 16:20:14 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -456,13 +456,14 @@ DEF  Digit_1      r3
 DEF  Digit_2      r4
 DEF  Digit_3      r5
 CSEG MainLoop     0000000e
-CSEG SegNumber    0000006f
-CSEG DigitTo7segCode 00000076
-CSEG DelayInMs    00000080
-CSEG SegNumberData 00000074
-CSEG SevenSegCodeData 0000007b
-CSEG DelayInMsEnd 0000008a
-CSEG DelayInMsLoop 00000086
-CSEG DelayOneMs   0000008d
-CSEG DelayOneMsLoop 00000091
-CSEG DelayOneMsEnd 00000095
+CSEG setfg        00000017
+CSEG SegNumber    00000025
+CSEG DigitTo7segCode 0000002c
+CSEG SegNumberData 0000002a
+CSEG SevenSegCodeData 00000031
+CSEG DelayInMs    00000036
+CSEG DelayInMsEnd 00000040
+CSEG DelayInMsLoop 0000003c
+CSEG DelayOneMs   00000043
+CSEG DelayOneMsLoop 00000047
+CSEG DelayOneMsEnd 0000004b

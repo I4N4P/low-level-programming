@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_39\main.asm Mon Oct 26 16:17:47 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_39\main.asm Tue Oct 27 16:20:14 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313def.inc'
@@ -672,8 +672,8 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                  ; Author : IAmTheProgramer
                                  ;
                                                    .MACRO SET_DIGIT
-                                                     PUSH R16
-                                                     PUSH R17
+                                                    // PUSH R16
+                                                     //PUSH R17
                                                      LDI R17,@0 
                                                      RCALL SegNumber
                                                      SBRC R17,1
@@ -687,8 +687,8 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                                      RCALL DigitTo7segCode 
                                                      OUT Segments_P,R16
                                                      OUT Digits_P,R17
-                                                     POP R17
-                                                     POP R16
+                                                     //POP R17
+                                                     //POP R16
                                                    .ENDMACRO
                                  
                                                   .MACRO DELAY
@@ -709,13 +709,13 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                                  .DEF Digit_2 = R4
                                                  .DEF Digit_3 = R5
                                  
-000000 e000                                      LDI R16,0
+000000 e001                                      LDI R16,1
 000001 2e20                                      MOV Digit_0,R16
 000002 e001                                      LDI R16,1
 000003 2e30                                      MOV Digit_1,R16
-000004 e002                                      LDI R16,2
+000004 e001                                      LDI R16,1
 000005 2e40                                      MOV Digit_2,R16
-000006 e003                                      LDI R16,3
+000006 e000                                      LDI R16,0
 000007 2e50                                      MOV Digit_3,R16
 000008 e70f                                      LDI R16,0x7F             
 000009 e012                                      LDI R17,2
@@ -725,158 +725,97 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
 00000d bb17                                      OUT DDRB,R17 
                                        MainLoop:                   
                                                  
-00000e 930f
-00000f 931f
-000010 e010
-000011 d05d
-000012 fd11
-000013 2d02
-000014 fd12
-000015 2d03
-000016 fd13
-000017 2d04
-000018 fd14
-000019 2d05
-00001a d05b
-00001b bb02
-00001c bb18
-00001d 911f
-00001e 910f                                      SET_DIGIT 0
-00001f 930f
-000020 931f
-000021 e001
-000022 e010
-000023 d05c
-000024 911f
-000025 910f                                      DELAY Time 
-000026 930f
-000027 931f
-000028 e011
-000029 d045
-00002a fd11
-00002b 2d02
-00002c fd12
-00002d 2d03
-00002e fd13
-00002f 2d04
-000030 fd14
-000031 2d05
-000032 d043
-000033 bb02
-000034 bb18
-000035 911f
-000036 910f                                      SET_DIGIT 1  
-000037 930f
-000038 931f
-000039 e001
-00003a e010
-00003b d044
-00003c 911f
-00003d 910f                                      DELAY Time
-00003e 930f
-00003f 931f
-000040 e012
-000041 d02d
-000042 fd11
-000043 2d02
-000044 fd12
-000045 2d03
-000046 fd13
-000047 2d04
-000048 fd14
-000049 2d05
-00004a d02b
-00004b bb02
-00004c bb18
-00004d 911f
-00004e 910f                                      SET_DIGIT 2  
-00004f 930f
-000050 931f
-000051 e001
-000052 e010
-000053 d02c
-000054 911f
-000055 910f                                      DELAY Time 
-000056 930f
-000057 931f
-000058 e013
-000059 d015
-00005a fd11
-00005b 2d02
-00005c fd12
-00005d 2d03
-00005e fd13
-00005f 2d04
-000060 fd14
-000061 2d05
-000062 d013
-000063 bb02
-000064 bb18
-000065 911f
-000066 910f                                      SET_DIGIT 3 
-000067 930f
-000068 931f
-000069 e001
-00006a e010
-00006b d014
-00006c 911f
-00006d 910f                                      DELAY Time   
-00006e cf9f                                      rjmp MainLoop
+                                                // SET_DIGIT 3
+                                                // DELAY Time 
+                                                 //SET_DIGIT 2  
+                                                // DELAY Time
+                                                 //SET_DIGIT 1  
+                                                // DELAY Time 
+                                                 //SET_DIGIT 0 
+                                                 //DELAY Time 
+00000e e000                                      ldi r16,0  
+00000f d007                                      rcall setfg
+000010 e001                                      ldi r16,1  
+000011 d005                                      rcall setfg
+000012 e002                                      ldi r16,2  
+000013 d003                                      rcall setfg
+000014 e003                                      ldi r16,3  
+000015 d001                                      rcall setfg
+000016 cff7                                      rjmp MainLoop
+                                 
+                                 
+                                 setfg:
+000017 2f10                                          mov R17,r16 
+000018 d00c                                          RCALL SegNumber
+000019 fd11                                          SBRC R17,1
+00001a 2d02                                          MOV R16,Digit_0
+00001b fd12                                          SBRC R17,2
+00001c 2d03                                          MOV R16,Digit_1
+00001d fd13                                          SBRC R17,3
+00001e 2d04                                          MOV R16,Digit_2
+00001f fd14                                          SBRC R17,4
+000020 2d05                                          MOV R16,Digit_3
+000021 d00a                                          RCALL DigitTo7segCode 
+000022 bb02                                          OUT Segments_P,R16
+000023 bb18                                          OUT Digits_P,R17
+000024 9508                                          ret
+                                 
+                                 
                                  
                                        SegNumber:
-00006f eee8                                      LDI R30, LOW(SegNumberData<<1) 
-000070 e0f0                                      LDI R31, HIGH(SegNumberData<<1)
-000071 0fe1                                      ADD R30,R17
-000072 9114                                      LPM R17,Z     
-000073 9508                                      RET
-000074 0402
-000075 1008                                      SegNumberData: .db 2, 4, 8, 16
+000025 e5e4                                      LDI R30, LOW(SegNumberData<<1) 
+000026 e0f0                                      LDI R31, HIGH(SegNumberData<<1)
+000027 0fe1                                      ADD R30,R17
+000028 9114                                      LPM R17,Z     
+000029 9508                                      RET
+00002a 0402
+00002b 1008                                      SegNumberData: .db 2, 4, 8, 16
                                  
                                  
                                        DigitTo7segCode:
-000076 efe6                                      LDI R30, LOW(SevenSegCodeData<<1) 
-000077 e0f0                                      LDI R31, HIGH(SevenSegCodeData<<1)
-000078 0fe0                                      ADD R30,R16
-000079 9104                                      LPM R16,Z     
-00007a 9508                                      RET
-00007b 063f
-00007c 4f5b
-00007d 6d66
-00007e 077d
-00007f 6f7f                                      SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F     
+00002c e6e2                                      LDI R30, LOW(SevenSegCodeData<<1) 
+00002d e0f0                                      LDI R31, HIGH(SevenSegCodeData<<1)
+00002e 0fe0                                      ADD R30,R16
+00002f 9104                                      LPM R16,Z     
+000030 9508                                      RET
+000031 063f
+000032 4f5b
+000033 6d66
+000034 077d
+000035 6f7f                                      SevenSegCodeData: .db 0x3F, 0x06, 0x5B,0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F     
                                  
                                  
                                        DelayInMs: 
-000080 938f                                       PUSH R24
-000081 939f                                       PUSH R25
-000082 2f80                                       MOV R24,R16
-000083 2f91                                       MOV R25,R17 
-000084 9700                                       SBIW R24,0
-000085 f021                                       BRBS 1,DelayInMsEnd
+000036 938f                                       PUSH R24
+000037 939f                                       PUSH R25
+000038 2f80                                       MOV R24,R16
+000039 2f91                                       MOV R25,R17 
+00003a 9700                                       SBIW R24,0
+00003b f021                                       BRBS 1,DelayInMsEnd
                                        DelayInMsLoop:
-000086 d006                                       RCALL DelayOneMs
-000087 9701                                       SBIW R24,1
-000088 f009                                       BRBS 1,DelayInMsEnd
-000089 cffc                                       RJMP DelayInMsLoop
+00003c d006                                       RCALL DelayOneMs
+00003d 9701                                       SBIW R24,1
+00003e f009                                       BRBS 1,DelayInMsEnd
+00003f cffc                                       RJMP DelayInMsLoop
                                        DelayInMsEnd:
-00008a 919f                                       POP R25
-00008b 918f                                       POP R24
-00008c 9508                                       RET
+000040 919f                                       POP R25
+000041 918f                                       POP R24
+000042 9508                                       RET
                                  
                                        DelayOneMs:
-00008d 938f                                       PUSH R24
-00008e 939f                                       PUSH R25
-00008f e384                                       LDI R24,52
-000090 e095                                       LDI R25,5
+000043 938f                                       PUSH R24
+000044 939f                                       PUSH R25
+000045 e384                                       LDI R24,52
+000046 e095                                       LDI R25,5
                                        DelayOneMsLoop:
-000091 0000                                       NOP
-000092 9701                                       SBIW R24,1
-000093 f009                                       BRBS 1,DelayOneMsEnd
-000094 cffc                                       RJMP DelayOneMsLoop
+000047 0000                                       NOP
+000048 9701                                       SBIW R24,1
+000049 f009                                       BRBS 1,DelayOneMsEnd
+00004a cffc                                       RJMP DelayOneMsLoop
                                        DelayOneMsEnd:
-000095 919f                                       POP R25
-000096 918f                                       POP R24
-000097 9508                                       RET 
+00004b 919f                                       POP R25
+00004c 918f                                       POP R24
+00004d 9508                                       RET 
                                  
                                     
 
@@ -896,9 +835,9 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATtiny2313" register use summary:
-x  :   0 y  :   0 z  :   2 r0 :   0 r1 :   0 r2 :   5 r3 :   5 r4 :   5 
-r5 :   5 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  54 r17:  49 r18:   0 r19:   0 r20:   1 
+x  :   0 y  :   0 z  :   2 r0 :   0 r1 :   0 r2 :   2 r3 :   2 r4 :   2 
+r5 :   2 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:  24 r17:  11 r18:   0 r19:   0 r20:   1 
 r21:   0 r22:   0 r23:   0 r24:   9 r25:   6 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   4 r31:   2 
 Registers used: 12 out of 35 (34.3%)
@@ -913,12 +852,12 @@ brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0
 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   0 ld    :   0 ldd   :   0 ldi   :  24 lds   :   0 lpm   :   4 
-lsl   :   0 lsr   :   0 mov   :  22 movw  :   0 neg   :   0 nop   :   1 
-or    :   0 ori   :   0 out   :  11 pop   :  20 push  :  20 rcall :  13 
-ret   :   4 reti  :   0 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :  16 lds   :   0 lpm   :   4 
+lsl   :   0 lsr   :   0 mov   :  11 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :   5 pop   :   4 push  :   4 rcall :   7 
+ret   :   5 reti  :   0 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   3 sbr   :   0 
-sbrc  :  16 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
+sbrc  :   4 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
@@ -927,7 +866,7 @@ Instructions used: 15 out of 105 (14.3%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000130    290     14    304    2048  14.8%
+[.cseg] 0x000000 0x00009c    142     14    156    2048   7.6%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

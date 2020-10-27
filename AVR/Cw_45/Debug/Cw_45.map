@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm Mon Oct 26 23:54:47 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR\Cw_45\main.asm Tue Oct 27 12:37:55 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -458,24 +458,17 @@ DEF  Digit_2      r4
 DEF  Digit_3      r5
 DEF  PulseEdgeCtrL r0
 DEF  PulseEdgeCtrH r1
-DEF  XLL          r16
-DEF  XHH          r17
-DEF  YLL          r18
-DEF  YHH          r19
-DEF  RL           r16
-DEF  RH           r17
-DEF  QL           r18
-DEF  QH           r19
 DEF  QCtrL        r24
 DEF  QCtrH        r25
-CSEG MainLoop     00000019
-CSEG NumberToDigits 00000095
+CSEG ClearCounter 00000019
+CSEG MainLoop     0000001b
+CSEG NumberToDigits 00000092
 CSEG SegNumber    000000b9
 CSEG DigitTo7segCode 000000c0
 CSEG DelayInMs    000000ca
-CSEG Divide       000000a6
-CSEG DivideLoop   000000aa
-CSEG DivideEnd    000000b2
+CSEG Divide       000000a8
+CSEG DivideLoop   000000ac
+CSEG DivideEnd    000000b4
 CSEG SegNumberData 000000be
 CSEG SevenSegCodeData 000000c5
 CSEG DelayInMsEnd 000000d4
