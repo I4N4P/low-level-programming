@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "Cw_1", "Cw_1\Cw_1.asmproj", "{59B1D629-9DCC-43ED-A0FD-8AB0E4D622AB}"
+EndProject
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "Cw_2", "Cw_2\Cw_2.asmproj", "{EDDDB1C4-4303-43DB-A076-FEFE590D9DD2}"
+EndProject
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "Cw_3", "Cw_3\Cw_3.asmproj", "{35D1A2DF-26A0-405B-89E6-EB40A4567222}"
+EndProject
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "Cw_4", "Cw_4\Cw_4.asmproj", "{0884C68D-1F77-43E6-A884-89D1B5ED68EA}"
+EndProject
+Project("{18226A42-8477-4023-8AD2-40C49DA407C9}") = "Cw_5", "Cw_5\Cw_5.asmproj", "{55CC161A-4FB4-4E4C-BA2B-2803121D172E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59B1D629-9DCC-43ED-A0FD-8AB0E4D622AB}.Debug|AVR.ActiveCfg = Debug|AVR
+		{59B1D629-9DCC-43ED-A0FD-8AB0E4D622AB}.Debug|AVR.Build.0 = Debug|AVR
+		{59B1D629-9DCC-43ED-A0FD-8AB0E4D622AB}.Release|AVR.ActiveCfg = Release|AVR
+		{59B1D629-9DCC-43ED-A0FD-8AB0E4D622AB}.Release|AVR.Build.0 = Release|AVR
+		{EDDDB1C4-4303-43DB-A076-FEFE590D9DD2}.Debug|AVR.ActiveCfg = Debug|AVR
+		{EDDDB1C4-4303-43DB-A076-FEFE590D9DD2}.Debug|AVR.Build.0 = Debug|AVR
+		{EDDDB1C4-4303-43DB-A076-FEFE590D9DD2}.Release|AVR.ActiveCfg = Release|AVR
+		{EDDDB1C4-4303-43DB-A076-FEFE590D9DD2}.Release|AVR.Build.0 = Release|AVR
+		{35D1A2DF-26A0-405B-89E6-EB40A4567222}.Debug|AVR.ActiveCfg = Debug|AVR
+		{35D1A2DF-26A0-405B-89E6-EB40A4567222}.Debug|AVR.Build.0 = Debug|AVR
+		{35D1A2DF-26A0-405B-89E6-EB40A4567222}.Release|AVR.ActiveCfg = Release|AVR
+		{35D1A2DF-26A0-405B-89E6-EB40A4567222}.Release|AVR.Build.0 = Release|AVR
+		{0884C68D-1F77-43E6-A884-89D1B5ED68EA}.Debug|AVR.ActiveCfg = Debug|AVR
+		{0884C68D-1F77-43E6-A884-89D1B5ED68EA}.Debug|AVR.Build.0 = Debug|AVR
+		{0884C68D-1F77-43E6-A884-89D1B5ED68EA}.Release|AVR.ActiveCfg = Release|AVR
+		{0884C68D-1F77-43E6-A884-89D1B5ED68EA}.Release|AVR.Build.0 = Release|AVR
+		{55CC161A-4FB4-4E4C-BA2B-2803121D172E}.Debug|AVR.ActiveCfg = Debug|AVR
+		{55CC161A-4FB4-4E4C-BA2B-2803121D172E}.Debug|AVR.Build.0 = Debug|AVR
+		{55CC161A-4FB4-4E4C-BA2B-2803121D172E}.Release|AVR.ActiveCfg = Release|AVR
+		{55CC161A-4FB4-4E4C-BA2B-2803121D172E}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
