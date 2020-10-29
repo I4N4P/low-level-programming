@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Thu Oct 29 21:55:49 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Thu Oct 29 22:32:24 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -490,16 +490,16 @@ DEF  ThreadA_MSB  r1
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
 CSEG ThreadA      00000034
-CSEG ThreadB      0000004b
-CSEG LOOP7        00000036
-CSEG DelayOneMsLoop7 00000038
-CSEG DelayOneMsEnd7 0000003c
-CSEG LOOP6        00000041
-CSEG DelayOneMsLoop6 00000043
-CSEG DelayOneMsEnd6 00000047
-CSEG LOOP5        0000004d
-CSEG DelayOneMsLoop5 0000004f
-CSEG DelayOneMsEnd5 00000053
-CSEG LOOP4        00000058
-CSEG DelayOneMsLoop4 0000005a
-CSEG DelayOneMsEnd4 0000005e
+CSEG ThreadB      0000003d
+CSEG ThreadA_DelayInMs 0000006b
+CSEG ThreadB_DelayInMs 00000047
+CSEG ThreadB_DelayInMsEnd 00000052
+CSEG ThreadB_DelayInMsLoop 0000004e
+CSEG ThreadB_DelayOneMs 00000056
+CSEG ThreadB_DelayOneMsLoop 0000005f
+CSEG ThreadB_DelayOneMsEnd 00000063
+CSEG ThreadA_DelayInMsEnd 00000076
+CSEG ThreadA_DelayInMsLoop 00000072
+CSEG ThreadA_DelayOneMs 0000007a
+CSEG ThreadA_DelayOneMsLoop 00000083
+CSEG ThreadA_DelayOneMsEnd 00000087
