@@ -12,42 +12,42 @@
                 .ORG OC1Aaddr RJMP _timer_isr 
        
      _timer_isr: 
+                PUSH R20
                 IN   R20,SREG
                 INC CurrentThread
                 ANDI CurrentThread,1
                 CPI CurrentThread,1
                 BREQ _Thread_B
      _Thread_A:
-                MOV   R21,R20
-                OUT  SREG,R22
+                STS  0x60,R23
+                STS  0x61,R24
+                STS  0x62,R25
+                LDS  R23, 0x63
+                LDS  R24, 0x64
+                LDS  R25,0x65
+                MOV   ThreadB_SREG_COPY,R20
+                POP R20
+                OUT  SREG,ThreadA_SREG_COPY
                 POP  ThreadB_MSB
                 POP  ThreadB_LSB
                 PUSH ThreadA_LSB
                 PUSH ThreadA_MSB
                 RETI
      _Thread_B:
-                MOV  R22,R20
-                OUT  SREG,R21
+                STS  0x63,R23
+                STS  0x64,R24
+                STS  0x65,R25
+                LDS  R23, 0x60
+                LDS R24, 0x61
+                LDS  R25,0x62
+                MOV  ThreadA_SREG_COPY,R20
+                POP  R20
+                OUT  SREG,ThreadB_SREG_COPY
                 POP  ThreadA_MSB
                 POP  ThreadA_LSB
                 PUSH ThreadB_LSB
                 PUSH ThreadB_MSB
                 RETI                          
-
-
-
-                .MACRO ThreadB_DELAY
-                  LDI R16,LOW(@0)   
-                  LDI R17,HIGH(@0)  
-                  RCALL ThreadB_DelayInMs 
-                  .ENDMACRO
-                .MACRO ThreadA_DELAY
-                  LDI R18,LOW(@0)   
-                  LDI R19,HIGH(@0)  
-                  RCALL ThreadA_DelayInMs
-
-               .ENDMACRO
-
 
                 .EQU Digits_P=PORTB     
                 .EQU Segments_P=PORTD    
@@ -56,16 +56,19 @@
                 .DEF ThreadA_MSB=R1
                 .DEF ThreadB_LSB=R2
                 .DEF ThreadB_MSB=R3
-                .DEF CurrentThread=R23
+                .DEF ThreadA_SREG_COPY=R4
+                .DEF ThreadB_SREG_COPY=R5
+
+                .DEF CurrentThread=R21
                 
 
           _main:
            SEI 
                 LDI R16,9
                 OUT TCCR1B,R16
-                LDI R16,high(200)
+                LDI R16,high(100)
                 OUT OCR1AH,R16
-                LDI R16,LOW(200)
+                LDI R16,LOW(100)
                 OUT OCR1AL,R16
                 LDI R16,64
                 OUT TIMSK,R16
@@ -90,101 +93,59 @@
                 OUT DDRB,R17
                 LDI R16,0x3F
                 OUT Segments_P,R16
+                CLR R16
+                CLR R17
                 
       ThreadA:   
-
-               CBI Digits_P,4        
-  ThreadA_DELAY 100
-               SBI Digits_P,4
-               ThreadA_DELAY 100
-             
+               
+               IN R24,Digits_P
+               IN R25,Digits_P
+               ANDI R24,8
+               ldi R23,16
+               add R25,R23
+               ANDI R25,16
+               add R24,R25
+               OUT Digits_P,R24
+               
+              LDI R23 ,1
+  ThreadALoop: 
+               LDI R24,52
+               LDI R25,250
+  ThreadADelayOneMsLoop:
+               NOP
+               SBIW R24,1
+               BRBS 1,ThreadADelayOneMsEnd
+               RJMP ThreadADelayOneMsLoop
+  ThreadADelayOneMsEnd:
+               DEC R23
+               CPSE R23,R24
+               RJMP ThreadALoop 
+                      
                RJMP ThreadA
 
-      ThreadB:                          //KKKKK
-                
-               CBI Digits_P,3
-               ThreadB_DELAY 100
+      ThreadB:                          
+               IN R24,Digits_P
+               IN R25,Digits_P
+               ANDI R24,16
+               ldi R23,8
+               add R25,R23
+               ANDI R25,8
+               add R24,R25
+               OUT Digits_P,R24
 
-               SBI Digits_P,3
-                ThreadB_DELAY 100
+               LDI R23 ,2
+    ThreadBLoop: 
+               LDI R24,52
+               LDI R25,250
+    ThreadBDelayOneMsLoop:
+               NOP
+               SBIW R24,1
+               BRBS 1,ThreadBDelayOneMsEnd
+               RJMP ThreadBDelayOneMsLoop
+    ThreadBDelayOneMsEnd:
+               DEC R23
+               CPSE R23,R24
+               RJMP ThreadBLoop
+             
                RJMP ThreadB
                RETI
-
-
-               ThreadB_DelayInMs: 
-               POP R24
-               sts 0x60,R24
-               MOV R24,R16
-               MOV R25,R17 
-               SBIW R24,0
-               BRBS 1,ThreadB_DelayInMsEnd
-      ThreadB_DelayInMsLoop:
-               RCALL ThreadB_DelayOneMs
-               SBIW R24,1
-               BRBS 1,ThreadB_DelayInMsEnd
-               RJMP ThreadB_DelayInMsLoop
-      ThreadB_DelayInMsEnd:
-               LDS R24,0X60
-               PUSH R24
-               RET
-
-      ThreadB_DelayOneMs:
-               POP R26
-               sts 0x61,R26
-
-               sts 0x62,R24
-               sts 0x63,R25
-               LDI R24,52
-               LDI R25,5
-      ThreadB_DelayOneMsLoop:
-               NOP
-               SBIW R24,1
-               BRBS 1,ThreadB_DelayOneMsEnd
-               RJMP ThreadB_DelayOneMsLoop
-      ThreadB_DelayOneMsEnd:
-               
-               LDS R24,0x62
-               LDS R25,0X63
-               LDS R26,0X61
-               PUSH R26
-              
-               RET
-
-      ThreadA_DelayInMs: 
-               POP R28
-               sts 0x64,R28
-               MOV R28,R18
-               MOV R29,R19 
-               SBIW R28,0
-               BRBS 1,ThreadA_DelayInMsEnd
-      ThreadA_DelayInMsLoop:
-               RCALL ThreadA_DelayOneMs
-               SBIW R28,1
-               BRBS 1,ThreadA_DelayInMsEnd
-               RJMP ThreadB_DelayInMsLoop
-      ThreadA_DelayInMsEnd:
-               LDS R28,0X64
-               PUSH R28
-               RET
-
-      ThreadA_DelayOneMs:
-               POP R30
-               sts 0x65,R30
-
-               sts 0x66,R28
-               sts 0x67,R29
-               LDI R28,52
-               LDI R29,5
-      ThreadA_DelayOneMsLoop:
-               NOP
-               SBIW R28,1
-               BRBS 1,ThreadA_DelayOneMsEnd
-               RJMP ThreadA_DelayOneMsLoop
-      ThreadA_DelayOneMsEnd:
-               
-               LDS R28,0x66
-               LDS R29,0X67
-               LDS R30,0X65
-               PUSH R30
-              
-               RET

@@ -22,23 +22,17 @@
   <FILE>Cw_5.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <_main><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>62</LINE></_main>
+  <_main><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>65</LINE></_main>
   <_timer_isr><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>14</LINE></_timer_isr>
-  <_Thread_B><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>28</LINE></_Thread_B>
-  <_Thread_A><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>20</LINE></_Thread_A>
-  <ThreadA><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>94</LINE></ThreadA>
-  <ThreadB><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>103</LINE></ThreadB>
-  <ThreadA_DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>153</LINE></ThreadA_DelayInMs>
-  <ThreadB_DelayInMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>114</LINE></ThreadB_DelayInMs>
-  <ThreadB_DelayInMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>126</LINE></ThreadB_DelayInMsEnd>
-  <ThreadB_DelayInMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>121</LINE></ThreadB_DelayInMsLoop>
-  <ThreadB_DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>131</LINE></ThreadB_DelayOneMs>
-  <ThreadB_DelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>139</LINE></ThreadB_DelayOneMsLoop>
-  <ThreadB_DelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>144</LINE></ThreadB_DelayOneMsEnd>
-  <ThreadA_DelayInMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>165</LINE></ThreadA_DelayInMsEnd>
-  <ThreadA_DelayInMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>160</LINE></ThreadA_DelayInMsLoop>
-  <ThreadA_DelayOneMs><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>170</LINE></ThreadA_DelayOneMs>
-  <ThreadA_DelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>178</LINE></ThreadA_DelayOneMsLoop>
-  <ThreadA_DelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>183</LINE></ThreadA_DelayOneMsEnd>
+  <_Thread_B><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>36</LINE></_Thread_B>
+  <_Thread_A><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>21</LINE></_Thread_A>
+  <ThreadA><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>99</LINE></ThreadA>
+  <ThreadB><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>126</LINE></ThreadB>
+  <ThreadALoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>111</LINE></ThreadALoop>
+  <ThreadADelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>114</LINE></ThreadADelayOneMsLoop>
+  <ThreadADelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>119</LINE></ThreadADelayOneMsEnd>
+  <ThreadBLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>137</LINE></ThreadBLoop>
+  <ThreadBDelayOneMsLoop><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>140</LINE></ThreadBDelayOneMsLoop>
+  <ThreadBDelayOneMsEnd><FILE>C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm</FILE><LINE>145</LINE></ThreadBDelayOneMsEnd>
  </LABELS>
 </ASSEMBLER_INFO>
