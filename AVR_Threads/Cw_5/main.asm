@@ -101,16 +101,16 @@
                IN R24,Digits_P
                IN R25,Digits_P
                ANDI R24,8
-               ldi R23,16
-               add R25,R23
+               LDI R23,16
+               ADD R25,R23
                ANDI R25,16
-               add R24,R25
+               ADD R24,R25
                OUT Digits_P,R24
                
-              LDI R23 ,1
+              LDI R23 ,50
   ThreadALoop: 
                LDI R24,52
-               LDI R25,250
+               LDI R25,5
   ThreadADelayOneMsLoop:
                NOP
                SBIW R24,1
@@ -127,16 +127,16 @@
                IN R24,Digits_P
                IN R25,Digits_P
                ANDI R24,16
-               ldi R23,8
-               add R25,R23
+               LDI R23,8
+               ADD R25,R23
                ANDI R25,8
-               add R24,R25
+               ADD R24,R25
                OUT Digits_P,R24
 
-               LDI R23 ,2
+               LDI R23 ,255
     ThreadBLoop: 
                LDI R24,52
-               LDI R25,250
+               LDI R25,5
     ThreadBDelayOneMsLoop:
                NOP
                SBIW R24,1
