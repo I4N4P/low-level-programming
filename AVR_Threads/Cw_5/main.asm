@@ -12,22 +12,37 @@
                 .ORG OC1Aaddr RJMP _timer_isr 
        
      _timer_isr: 
+                PUSH R20
                 IN   R20,SREG
                 INC CurrentThread
                 ANDI CurrentThread,1
                 CPI CurrentThread,1
                 BREQ _Thread_B
      _Thread_A:
-                MOV   R21,R20
-                OUT  SREG,R22
+                STS  0x60,R23
+                STS  0x61,R24
+                STS  0x62,R25
+                LDS  R23, 0x63
+                LDS  R24, 0x64
+                LDS  R25,0x65
+                MOV   ThreadB_SREG_COPY,R20
+                POP R20
+                OUT  SREG,ThreadA_SREG_COPY
                 POP  ThreadB_MSB
                 POP  ThreadB_LSB
                 PUSH ThreadA_LSB
                 PUSH ThreadA_MSB
                 RETI
      _Thread_B:
-                MOV  R22,R20
-                OUT  SREG,R21
+                STS  0x63,R23
+                STS  0x64,R24
+                STS  0x65,R25
+                LDS  R23, 0x60
+                LDS R24, 0x61
+                LDS  R25,0x62
+                MOV  ThreadA_SREG_COPY,R20
+                POP  R20
+                OUT  SREG,ThreadB_SREG_COPY
                 POP  ThreadA_MSB
                 POP  ThreadA_LSB
                 PUSH ThreadB_LSB
@@ -41,16 +56,19 @@
                 .DEF ThreadA_MSB=R1
                 .DEF ThreadB_LSB=R2
                 .DEF ThreadB_MSB=R3
-                .DEF CurrentThread=R23
+                .DEF ThreadA_SREG_COPY=R4
+                .DEF ThreadB_SREG_COPY=R5
+
+                .DEF CurrentThread=R21
                 
 
           _main:
            SEI 
                 LDI R16,9
                 OUT TCCR1B,R16
-                LDI R16,high(200)
+                LDI R16,high(100)
                 OUT OCR1AH,R16
-                LDI R16,LOW(200)
+                LDI R16,LOW(100)
                 OUT OCR1AL,R16
                 LDI R16,64
                 OUT TIMSK,R16
@@ -75,77 +93,59 @@
                 OUT DDRB,R17
                 LDI R16,0x3F
                 OUT Segments_P,R16
+                CLR R16
+                CLR R17
                 
       ThreadA:   
-
-               CBI Digits_P,4
-
-               LDI R18 ,5
-         LOOP7:
-               LDI R26,52
-               LDI R27,250
-      DelayOneMsLoop7:
+               
+               IN R24,Digits_P
+               IN R25,Digits_P
+               ANDI R24,8
+               LDI R23,16
+               ADD R25,R23
+               ANDI R25,16
+               ADD R24,R25
+               OUT Digits_P,R24
+               
+              LDI R23 ,50
+  ThreadALoop: 
+               LDI R24,52
+               LDI R25,5
+  ThreadADelayOneMsLoop:
                NOP
-               SBIW R26,1
-               BRBS 1,DelayOneMsEnd7
-               RJMP DelayOneMsLoop7
-      DelayOneMsEnd7:
-               DEC R18
-               CPSE R18,R26
-               RJMP LOOP7         
-  
-               SBI Digits_P,4
-
-               LDI R18 ,5
-        LOOP6:
-               LDI R26,52
-               LDI R27,250
-      DelayOneMsLoop6:
-               NOP
-               SBIW R26,1
-               BRBS 1,DelayOneMsEnd6
-               RJMP DelayOneMsLoop6
-      DelayOneMsEnd6:
-               DEC R18
-               CPSE R18,R26
-               RJMP LOOP6
-             
+               SBIW R24,1
+               BRBS 1,ThreadADelayOneMsEnd
+               RJMP ThreadADelayOneMsLoop
+  ThreadADelayOneMsEnd:
+               DEC R23
+               CPSE R23,R24
+               RJMP ThreadALoop 
+                      
                RJMP ThreadA
 
-      ThreadB:                          //KKKKK
-                
-                CBI Digits_P,3
+      ThreadB:                          
+               IN R24,Digits_P
+               IN R25,Digits_P
+               ANDI R24,16
+               LDI R23,8
+               ADD R25,R23
+               ANDI R25,8
+               ADD R24,R25
+               OUT Digits_P,R24
 
-               LDI R17 ,30
-        LOOP5: 
+               LDI R23 ,255
+    ThreadBLoop: 
                LDI R24,52
-               LDI R25,250
-      DelayOneMsLoop5:
+               LDI R25,5
+    ThreadBDelayOneMsLoop:
                NOP
                SBIW R24,1
-               BRBS 1,DelayOneMsEnd5
-               RJMP DelayOneMsLoop5
-      DelayOneMsEnd5:
-               DEC R17
-               CPSE R17,R24
-               RJMP LOOP5
-             
-
-               SBI Digits_P,3
-
-               LDI R17 ,30
-         LOOP4: 
-               LDI R24,52
-               LDI R25,250
-      DelayOneMsLoop4:
-               NOP
-               SBIW R24,1
-               BRBS 1,DelayOneMsEnd4
-               RJMP DelayOneMsLoop4
-      DelayOneMsEnd4:
-               DEC R17
-               CPSE R17,R24
-               RJMP LOOP4
+               BRBS 1,ThreadBDelayOneMsEnd
+               RJMP ThreadBDelayOneMsLoop
+    ThreadBDelayOneMsEnd:
+               DEC R23
+               CPSE R23,R24
+               RJMP ThreadBLoop
              
                RJMP ThreadB
                RETI
