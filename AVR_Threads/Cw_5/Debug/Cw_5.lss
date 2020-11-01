@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Fri Oct 30 21:39:48 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Sun Nov 01 21:42:04 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313adef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313adef.inc'
@@ -713,46 +713,64 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                  
                                  
                                                  .CSEG
-000000 c032                                      .ORG 0 RJMP _main 
+000000 c042                                      .ORG 0 RJMP _main 
 000004 c000                                      .ORG OC1Aaddr RJMP _timer_isr 
                                         
-                                      _timer_isr: 
+                                      _timer_isr:
 000005 934f                                      PUSH R20
 000006 b74f                                      IN   R20,SREG
-000007 9553                                      INC CurrentThread
-000008 7051                                      ANDI CurrentThread,1
-000009 3051                                      CPI CurrentThread,1
-00000a f0a1                                      BREQ _Thread_B
+000007 9523                                      INC CurrentThread
+000008 7021                                      ANDI CurrentThread,1
+000009 3021                                      CPI CurrentThread,1
+00000a f0e1                                      BREQ _Thread_B
                                       _Thread_A:
-00000b 9370 0060                                 STS  0x60,R23
-00000d 9380 0061                                 STS  0x61,R24
-00000f 9390 0062                                 STS  0x62,R25
-000011 9170 0063                                 LDS  R23, 0x63
-000013 9180 0064                                 LDS  R24, 0x64
+00000b 9380 0060                                 STS  0x60,R24
+00000d 9390 0061                                 STS  0x61,R25
+00000f 93a0 0062                                 STS  0x62,R26
+000011 93b0 0063                                 STS  0x63,R27
+000013 9180 0064                                 LDS  R24,0x64
 000015 9190 0065                                 LDS  R25,0x65
-000017 2e54                                      MOV   ThreadB_SREG_COPY,R20
-000018 914f                                      POP R20
-000019 be4f                                      OUT  SREG,ThreadA_SREG_COPY
-00001a 903f                                      POP  ThreadB_MSB
-00001b 902f                                      POP  ThreadB_LSB
-00001c 920f                                      PUSH ThreadA_LSB
-00001d 921f                                      PUSH ThreadA_MSB
-00001e 9518                                      RETI
+000017 91a0 0066                                 LDS  R26,0x66
+000019 91b0 0067                                 LDS  R27,0x67
+00001b 2e54                                      MOV  ThreadB_SREG_COPY,R20
+00001c 914f                                      POP  R20
+00001d be4f                                      OUT  SREG,ThreadA_SREG_COPY
+00001e 903f                                      POP  ThreadB_MSB
+00001f 902f                                      POP  ThreadB_LSB
+000020 909f                                      POP  ThreadBDelayAdress_MSB
+000021 908f                                      POP  ThreadBDelayAdress_LSB 
+000022 926f                                      PUSH ThreadADelayAdress_LSB
+000023 927f                                      PUSH ThreadADelayAdress_MSB
+000024 920f                                      PUSH ThreadA_LSB
+000025 921f                                      PUSH ThreadA_MSB
+000026 9518                                      RETI
                                       _Thread_B:
-00001f 9370 0063                                 STS  0x63,R23
-000021 9380 0064                                 STS  0x64,R24
-000023 9390 0065                                 STS  0x65,R25
-000025 9170 0060                                 LDS  R23, 0x60
-000027 9180 0061                                 LDS R24, 0x61
-000029 9190 0062                                 LDS  R25,0x62
-00002b 2e44                                      MOV  ThreadA_SREG_COPY,R20
-00002c 914f                                      POP  R20
-00002d be5f                                      OUT  SREG,ThreadB_SREG_COPY
-00002e 901f                                      POP  ThreadA_MSB
-00002f 900f                                      POP  ThreadA_LSB
-000030 922f                                      PUSH ThreadB_LSB
-000031 923f                                      PUSH ThreadB_MSB
-000032 9518                                      RETI                          
+000027 9380 0064                                 STS  0x64,R24
+000029 9390 0065                                 STS  0x65,R25
+00002b 93a0 0066                                 STS  0x66,R26
+00002d 93b0 0067                                 STS  0x67,R27
+00002f 9180 0060                                 LDS  R24,0x60
+000031 9190 0061                                 LDS  R25,0x61
+000033 91a0 0062                                 LDS  R26,0x62
+000035 91b0 0063                                 LDS  R27,0x63
+000037 2e44                                      MOV  ThreadA_SREG_COPY,R20
+000038 914f                                      POP  R20
+000039 be5f                                      OUT  SREG,ThreadB_SREG_COPY
+00003a 901f                                      POP  ThreadA_MSB
+00003b 900f                                      POP  ThreadA_LSB
+00003c 907f                                      POP  ThreadADelayAdress_MSB
+00003d 906f                                      POP  ThreadADelayAdress_LSB 
+00003e 928f                                      PUSH ThreadBDelayAdress_LSB
+00003f 929f                                      PUSH ThreadBDelayAdress_MSB
+000040 922f                                      PUSH ThreadB_LSB
+000041 923f                                      PUSH ThreadB_MSB
+000042 9518                                      RETI                          
+                                 
+                                                 .MACRO DELAY
+                                                     LDI R26 ,LOW(@0)
+                                                     LDI R27 ,HIGH(@0)
+                                                     RCALL DelayLoop
+                                                 .ENDMACRO
                                  
                                                  .EQU Digits_P=PORTB     
                                                  .EQU Segments_P=PORTD    
@@ -763,97 +781,93 @@ AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopozi
                                                  .DEF ThreadB_MSB=R3
                                                  .DEF ThreadA_SREG_COPY=R4
                                                  .DEF ThreadB_SREG_COPY=R5
-                                 
-                                                 .DEF CurrentThread=R21
+                                                 .DEF ThreadADelayAdress_LSB=R6
+                                                 .DEF ThreadADelayAdress_MSB=R7
+                                                 .DEF ThreadBDelayAdress_LSB=R8
+                                                 .DEF ThreadBDelayAdress_MSB=R9
+                                                 .DEF CurrentThread=R18
                                                  
                                  
                                            _main:
-000033 9478                                 SEI 
-000034 e009                                      LDI R16,9
-000035 bd0e                                      OUT TCCR1B,R16
-000036 e000                                      LDI R16,high(100)
-000037 bd0b                                      OUT OCR1AH,R16
-000038 e604                                      LDI R16,LOW(100)
-000039 bd0a                                      OUT OCR1AL,R16
-00003a e400                                      LDI R16,64
-00003b bf09                                      OUT TIMSK,R16
-00003c 2700                                      CLR R16
-00003d bd0c                                      OUT TCNT1L,R16
-00003e bd0d                                      OUT TCNT1H,R16
-00003f 2755                                      CLR CurrentThread
+000043 9478                                      SEI 
+000044 e009                                      LDI R16,9
+000045 bd0e                                      OUT TCCR1B,R16
+000046 e000                                      LDI R16,high(100)
+000047 bd0b                                      OUT OCR1AH,R16
+000048 e604                                      LDI R16,LOW(100)
+000049 bd0a                                      OUT OCR1AL,R16
+00004a e400                                      LDI R16,64
+00004b bf09                                      OUT TIMSK,R16
+00004c 2700                                      CLR R16
+00004d bd0c                                      OUT TCNT1L,R16
+00004e bd0d                                      OUT TCNT1H,R16
+00004f 2722                                      CLR CurrentThread
                                  
-000040 e501                                      LDI R16,LOW(ThreadA)
-000041 2e00                                      MOV ThreadA_LSB,R16
-000042 e000                                      LDI R16,HIGH(ThreadA)
-000043 2e00                                      MOV ThreadA_LSB,R16
-000044 e604                                      LDI R16,LOW(ThreadB)
-000045 2e20                                      MOV ThreadB_LSB,R16
-000046 e000                                      LDI R16,HIGH(ThreadB)
-000047 2e30                                      MOV ThreadB_MSB,R16
+000050 e601                                      LDI R16,LOW(ThreadA)
+000051 2e00                                      MOV ThreadA_LSB,R16
+000052 e000                                      LDI R16,HIGH(ThreadA)
+000053 2e00                                      MOV ThreadA_LSB,R16
+000054 e60d                                      LDI R16,LOW(ThreadB)
+000055 2e20                                      MOV ThreadB_LSB,R16
+000056 e000                                      LDI R16,HIGH(ThreadB)
+000057 2e30                                      MOV ThreadB_MSB,R16
                                                 
-000048 e70f                                      LDI R16,0x7F                        
-000049 e118                                      LDI R17,24 
-00004a bb18                                      OUT Digits_P,R17
-00004b bb01                                      OUT DDRD,R16
-00004c bb17                                      OUT DDRB,R17
-00004d e30f                                      LDI R16,0x3F
-00004e bb02                                      OUT Segments_P,R16
-00004f 2700                                      CLR R16
-000050 2711                                      CLR R17
+000058 e70f                                      LDI R16,0x7F                        
+000059 e118                                      LDI R17,24 
+00005a bb18                                      OUT Digits_P,R17
+00005b bb01                                      OUT DDRD,R16
+00005c bb17                                      OUT DDRB,R17
+00005d e30f                                      LDI R16,0x3F
+00005e bb02                                      OUT Segments_P,R16
+00005f 2700                                      CLR R16
+000060 2711                                      CLR R17
                                                  
-                                       ThreadA:   
-                                                
-000051 b388                                     IN R24,Digits_P
-000052 b398                                     IN R25,Digits_P
-000053 7088                                     ANDI R24,8
-000054 e170                                     LDI R23,16
-000055 0f97                                     ADD R25,R23
-000056 7190                                     ANDI R25,16
-000057 0f89                                     ADD R24,R25
-000058 bb88                                     OUT Digits_P,R24
-                                                
-000059 e372                                    LDI R23 ,50
-                                   ThreadALoop: 
-00005a e384                                     LDI R24,52
-00005b e095                                     LDI R25,5
-                                   ThreadADelayOneMsLoop:
-00005c 0000                                     NOP
-00005d 9701                                     SBIW R24,1
-00005e f009                                     BRBS 1,ThreadADelayOneMsEnd
-00005f cffc                                     RJMP ThreadADelayOneMsLoop
-                                   ThreadADelayOneMsEnd:
-000060 957a                                     DEC R23
-000061 1378                                     CPSE R23,R24
-000062 cff7                                     RJMP ThreadALoop 
-                                                       
-000063 cfed                                     RJMP ThreadA
+                                     ThreadA:   
+                                     TogglePinA:      
+000061 b388                                     IN R24,Digits_P
+000062 b398                                     IN R25,Digits_P
+000063 7088                                     ANDI R24,8
+000064 e1a0                                     LDI R26,16
+000065 0f9a                                     ADD R25,R26
+000066 7190                                     ANDI R25,16
+000067 0f89                                     ADD R24,R25
+000068 bb88                                     OUT Digits_P,R24
+000069 e1a9
+00006a e0b0
+00006b d00e                                     DELAY 25
+00006c cff4                                     RJMP ThreadA
+                                  
+                                     
+                                      ThreadB:  
+                                      TogglePinB:                        
+00006d b388                                     IN R24,Digits_P
+00006e b398                                     IN R25,Digits_P
+00006f 7180                                     ANDI R24,16
+000070 e0a8                                     LDI R26,8
+000071 0f9a                                     ADD R25,R26
+000072 7098                                     ANDI R25,8
+000073 0f89                                     ADD R24,R25
+000074 bb88                                     OUT Digits_P,R24
+000075 efa4
+000076 e0b1
+000077 d002                                     DELAY 500
+000078 cff4                                     RJMP ThreadB
+000079 9518                                     RETI
                                  
-                                       ThreadB:                          
-000064 b388                                     IN R24,Digits_P
-000065 b398                                     IN R25,Digits_P
-000066 7180                                     ANDI R24,16
-000067 e078                                     LDI R23,8
-000068 0f97                                     ADD R25,R23
-000069 7098                                     ANDI R25,8
-00006a 0f89                                     ADD R24,R25
-00006b bb88                                     OUT Digits_P,R24
                                  
-00006c ef7f                                     LDI R23 ,255
-                                     ThreadBLoop: 
-00006d e384                                     LDI R24,52
-00006e e095                                     LDI R25,5
-                                     ThreadBDelayOneMsLoop:
-00006f 0000                                     NOP
-000070 9701                                     SBIW R24,1
-000071 f009                                     BRBS 1,ThreadBDelayOneMsEnd
-000072 cffc                                     RJMP ThreadBDelayOneMsLoop
-                                     ThreadBDelayOneMsEnd:
-000073 957a                                     DEC R23
-000074 1378                                     CPSE R23,R24
-000075 cff7                                     RJMP ThreadBLoop
-                                              
-000076 cfed                                     RJMP ThreadB
-000077 9518                                     RETI
+                                    DelayLoop: 
+00007a e384                                     LDI R24,52
+00007b e095                                     LDI R25,5
+                                   DelayOneMsLoop:
+00007c 0000                                     NOP
+00007d 9701                                     SBIW R24,1
+00007e f009                                     BRBS 1,DelayOneMsEnd
+00007f cffc                                     RJMP DelayOneMsLoop
+                                   DelayOneMsEnd:
+000080 9711                                     SBIW R26,1
+000081 f009                                     BREQ END
+000082 cff7                                     RJMP DelayLoop  
+                                          END:
 
 
 RESOURCE USE INFORMATION
@@ -872,37 +886,37 @@ counted separately from r26..r31 here.
 
 "ATtiny2313A" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   4 r1 :   2 r2 :   3 r3 :   3 r4 :   2 
-r5 :   2 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  24 r17:   4 r18:   0 r19:   0 r20:   6 
-r21:   4 r22:   0 r23:  14 r24:  18 r25:  14 r26:   0 r27:   0 r28:   0 
+r5 :   2 r6 :   2 r7 :   2 r8 :   2 r9 :   2 r10:   0 r11:   0 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:  24 r17:   4 r18:   4 r19:   0 r20:   6 
+r21:   0 r22:   0 r23:   0 r24:  14 r25:  13 r26:  11 r27:   6 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 13 out of 35 (37.1%)
+Registers used: 18 out of 35 (51.4%)
 
 "ATtiny2313A" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   4 adiw  :   0 and   :   0 
-andi  :   5 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   2 
-brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
+andi  :   5 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   1 
+brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0 
 clh   :   0 cli   :   0 cln   :   0 clr   :   4 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   1 
-cpse  :   2 dec   :   2 eor   :   0 icall :   0 ijmp  :   0 in    :   5 
-inc   :   1 ld    :   0 ldd   :   0 ldi   :  19 lds   :   6 lpm   :   0 
-lsl   :   0 lsr   :   0 mov   :   6 movw  :   0 neg   :   0 nop   :   2 
-or    :   0 ori   :   0 out   :  14 pop   :   6 push  :   5 rcall :   0 
-ret   :   0 reti  :   3 rjmp  :   8 rol   :   0 ror   :   0 sbc   :   0 
+cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   5 
+inc   :   1 ld    :   0 ldd   :   0 ldi   :  19 lds   :   8 lpm   :   0 
+lsl   :   0 lsr   :   0 mov   :   6 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :  14 pop   :  10 push  :   9 rcall :   2 
+ret   :   1 reti  :   3 rjmp  :   6 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   2 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   1 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
-spm   :   0 st    :   0 std   :   0 sts   :   6 sub   :   0 subi  :   0 
+spm   :   0 st    :   0 std   :   0 sts   :   8 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
 Instructions used: 22 out of 105 (21.0%)
 
 "ATtiny2313A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000f0    234      0    234    2048  11.4%
+[.cseg] 0x000000 0x000108    258      0    258    2048  12.6%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 
