@@ -84,7 +84,7 @@
                 
 
           _main:
-                SEI 
+                 
                 LDI R16,9
                 OUT TCCR1B,R16
                 LDI R16,high(100)
@@ -116,7 +116,7 @@
                 OUT Segments_P,R16
                 CLR R16
                 CLR R17
-                
+                SEI
     ThreadA:   
     TogglePinA:      
                IN R24,Digits_P
