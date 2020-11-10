@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Sun Nov 01 21:54:45 2020
+AVRASM ver. 2.2.7  C:\Users\dawid\OneDrive\Pulpit\Studia\Programowanie_niskopoziomowe\Assembler\AVR_Threads\Cw_5\main.asm Wed Nov 04 13:10:32 2020
 
 
 EQU  SIGNATURE_000 0000001e
@@ -478,24 +478,28 @@ EQU  WDTaddr      00000012
 EQU  PCIAaddr     00000013
 EQU  PCIDaddr     00000014
 EQU  INT_VECTORS_SIZE 00000015
-CSEG _main        00000033
+CSEG _main        00000043
 CSEG _timer_isr   00000005
-DEF  CurrentThread r21
-CSEG _Thread_B    0000001f
+DEF  CurrentThread r18
+CSEG _Thread_B    00000027
 CSEG _Thread_A    0000000b
 DEF  ThreadB_SREG_COPY r5
 DEF  ThreadA_SREG_COPY r4
 DEF  ThreadB_MSB  r3
 DEF  ThreadB_LSB  r2
+DEF  ThreadBDelayAdress_MSB r9
+DEF  ThreadBDelayAdress_LSB r8
+DEF  ThreadADelayAdress_LSB r6
+DEF  ThreadADelayAdress_MSB r7
 DEF  ThreadA_LSB  r0
 DEF  ThreadA_MSB  r1
 EQU  Digits_P     00000018
 EQU  Segments_P   00000012
-CSEG ThreadA      00000051
-CSEG ThreadB      00000064
-CSEG ThreadALoop  0000005a
-CSEG ThreadADelayOneMsLoop 0000005c
-CSEG ThreadADelayOneMsEnd 00000060
-CSEG ThreadBLoop  0000006d
-CSEG ThreadBDelayOneMsLoop 0000006f
-CSEG ThreadBDelayOneMsEnd 00000073
+CSEG ThreadA      00000061
+CSEG ThreadB      0000006d
+CSEG TogglePinA   00000061
+CSEG DelayLoop    0000007a
+CSEG TogglePinB   0000006d
+CSEG DelayOneMsLoop 0000007c
+CSEG DelayOneMsEnd 00000080
+CSEG END          00000083
